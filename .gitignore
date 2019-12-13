@@ -1,5 +1,4 @@
 /vendor/*
 /conf/*
 .git
-composer.json
 composer.lock
