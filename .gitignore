@@ -1,4 +1,4 @@
-/vendor/*
-/conf/*
+src/vendor/*
+src/conf/*
 .git
 composer.lock
