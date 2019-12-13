@@ -1,4 +1,5 @@
 src/vendor/*
 src/conf/*
 .git
+.idea
 composer.lock
