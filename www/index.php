@@ -50,4 +50,10 @@ $app->get('/creation[/]',
         return $controleur->createToken($req, $resp, $args);
     });
 
+$app->post('/creation[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->createToken($req, $resp, $args);
+    });
+
 $app->run();
