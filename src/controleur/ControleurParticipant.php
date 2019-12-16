@@ -4,7 +4,7 @@
 namespace mywishlist\controleur;
 
 
-class AfficherListe
+class ControleurParticipant
 {
 
     public function getItem($rq, $rs, $args){

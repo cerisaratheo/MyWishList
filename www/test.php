@@ -5,9 +5,9 @@ use mywishlist\bd\Eloquent;
 use mywishlist\models\Liste;
 use mywishlist\models\Item;
 
-require 'src/vendor/autoload.php';
+require '../src/vendor/autoload.php';
 
-Eloquent::start('src/conf/conf.ini');
+Eloquent::start('../src/conf/conf.ini');
 
 // QUESTION 1.1 -----------
 echo '<h3>Liste des souhaits</h3>';

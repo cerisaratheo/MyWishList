@@ -4,7 +4,7 @@ namespace mywishlist;
 
 require 'src/vendor/autoload.php';
 
-use mywishlist\controleur\AfficherListe;
+use mywishlist\controleur\ControleurParticipant;
 use mywishlist\models\Liste;
 use mywishlist\bd\Eloquent;
 use\Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,13 +26,13 @@ $app->get('/liste[/]',
 
 $app->get('/testVue/listes[/]',
     function(Request$req, Response$resp, $args) {
-        $controleur = new AfficherListe($this);
+        $controleur = new ControleurParticipant($this);
         return $controleur->getListeSouhaits($req, $resp, $args);
 });
 
 $app->get('/testVue/item/{id}[/]',
     function($req, $resp, $args) {
-        $controleur = new AfficherListe($this);
+        $controleur = new ControleurParticipant($this);
         return $controleur->getItem($req, $resp, $args);
     });
 
