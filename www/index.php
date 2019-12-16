@@ -12,7 +12,14 @@ use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 Eloquent::start('../src/conf/conf.ini');
-$app = new \Slim\App;
+
+$configuration = [
+    'settings'=> [
+        'displayErrorDetails' => true,
+        'dbconf' => '/conf/db.conf.ini' ]
+];
+$c=new\Slim\Container($configuration);
+$app = new \Slim\App($c);
 
 $app->get('/liste[/]',
     function(Request$req, Response$resp, $args) {
@@ -37,7 +44,7 @@ $app->get('/testVue/item/{id}[/]',
         return $controleur->getItem($req, $resp, $args);
     });
 
-$app->get('/creation/{id}[/]',
+$app->get('/creation[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->createToken($req, $resp, $args);

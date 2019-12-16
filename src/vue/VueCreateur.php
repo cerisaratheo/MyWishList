@@ -14,8 +14,10 @@ class VueCreateur
     }
 
     public function render(int $index) : string {
-        $contenu = "";
         switch ($index){
+            case 0 :
+                $contenu = "";
+                break;
             case 1 :
                 $contenu = $this->afficherToken();
                 break;
@@ -23,8 +25,10 @@ class VueCreateur
         $html = <<<END
 <!DOCTYPE html> 
 <body>  
-    <form action="index.php" method="GET">
-      <input type="button" name="generer_token" value="Générer token">
+    <form action="creation" method="POST">
+      <button type="submit" name="token" value="1">
+        Générer le lien de partage
+      </button>
     </form>
     $contenu
 </body>
