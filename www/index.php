@@ -4,6 +4,7 @@ namespace mywishlist;
 
 require '../src/vendor/autoload.php';
 
+use mywishlist\controleur\ControleurCreateur;
 use mywishlist\controleur\ControleurParticipant;
 use mywishlist\models\Liste;
 use mywishlist\bd\Eloquent;
@@ -34,6 +35,12 @@ $app->get('/testVue/item/{id}[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurParticipant($this);
         return $controleur->getItem($req, $resp, $args);
+    });
+
+$app->get('/creation/{id}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->createToken($req, $resp, $args);
     });
 
 $app->run();
