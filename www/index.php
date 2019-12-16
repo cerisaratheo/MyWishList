@@ -2,7 +2,7 @@
 
 namespace mywishlist;
 
-require 'src/vendor/autoload.php';
+require '../src/vendor/autoload.php';
 
 use mywishlist\controleur\ControleurParticipant;
 use mywishlist\models\Liste;
@@ -10,7 +10,7 @@ use mywishlist\bd\Eloquent;
 use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-Eloquent::start('src/conf/conf.ini');
+Eloquent::start('../src/conf/conf.ini');
 $app = new \Slim\App;
 
 $app->get('/liste[/]',
