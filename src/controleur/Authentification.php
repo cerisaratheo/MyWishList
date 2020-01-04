@@ -10,28 +10,41 @@ class Authentification
 {
 
     public static function createUser($userName, $password){
+        // A faire : vérifier la conformité de $password avec la police
+        // si ok :
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
+        $newUser = new Utilisateur();
+        $newUser->username = $userName;
+        $newUser->password = $hash;
+        //$newUser->role = ?;
+        $newUser->save();
     }
 
     public static function authenticate( $username, $password){
         $user = Utilisateur::select('*')
+            ->where("username","=",$username)
             ->get();
         if (password_verify($password, $user->password)) {
-            $_SESSION[$user->id] = array(
-                'username'   => $user->login,
-                'role_id'    => 12,
-                'client_ip'  => '201.456.23.128',
-                'auth-level' => 10000 )
-            );
+            self::loadProfile($user);
         }
     }
 
-    private static function loadProfile($uid){
-
+    private static function loadProfile($user){
+        $role = Utilisateur::role()
+            ->where('uid','=',$user->id)
+            ->first();
+        $_SESSION['profile'] = array(
+            'username'   => $user->username,
+            'role_id'    => $user->role,
+            'client_ip'  => $_SERVER['REMOTE_ADDR'],
+            'level' => $role->auth_level
+            );
     }
 
-    public static function chechAccessRights($required){
-
+    public static function checkAccessRights($required){
+        if ($_SESSION['profile']['level'] < $required)
+            throw new AuthException ;
     }
 
 

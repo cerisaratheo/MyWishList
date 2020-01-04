@@ -44,16 +44,27 @@ $app->get('/testVue/item/{id}[/]',
         return $controleur->getItem($req, $resp, $args);
     });
 
-$app->get('/creation[/]',
+$app->get('/creation/creer[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->createToken($req, $resp, $args);
     });
 
-$app->post('/creation[/]',
+$app->post('/creation/creer[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->createToken($req, $resp, $args);
+    });
+
+$app->get('/creation/{token}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->accederListe($req, $resp, $args);
+    });
+
+$app->get('/participation/{token}[/]',
+    function($req, $resp, $args) {
+        return $resp;
     });
 
 $app->run();
