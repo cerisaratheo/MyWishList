@@ -10,6 +10,49 @@ use mywishlist\vue\VueCreateur;
 class ControleurCreateur
 {
 
+    public function creerListe($rq, $rs, $args){
+        if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
+            $vue = new VueCreateur("");
+            $html = $vue->render(0);
+        }
+        else {
+            // A filter !
+            $titre = $rq->getParsedBody()['titre'];
+            $desc = $rq->getParsedBody()['desc'];
+            $date = $rq->getParsedBody()['expiration'];
+
+            // Generation du token de modification
+            $token = $this->genererToken($rq, $rs, $args);
+
+            // On sauvegarde la liste dans la BDD
+            $liste = new Liste();
+            $liste->titre = $titre;
+            $liste->description = $desc;
+            $liste->expiration = $date;
+            $liste->token_modif = $token;
+            $liste->save();
+
+            $vue = new VueCreateur("");
+            $html = $vue->render(0);
+        }
+
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+    private function genererToken($rq, $rs, $args){
+        // On verifie que le token est n'existe pas deja dans la BDD
+        do {
+            $token = random_bytes(5);
+            $res = Liste::select('no')
+                    ->where('token_modif',"=",$token)
+                    ->first();
+        } while (! is_null($res));
+
+        $url = $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.bin2hex($token);
+        return $url;
+    }
+
     public function createToken($rq, $rs, $args){
         if (isset($rq->getParsedBody()['token']))
             $id = $rq->getParsedBody()['token'];
