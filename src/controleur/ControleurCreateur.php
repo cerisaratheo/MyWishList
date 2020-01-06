@@ -88,4 +88,9 @@ class ControleurCreateur
         }
         return $rs;
     }
+
+
+    public function ajoutItem($rq, $rs, $args){
+        // à faire
+    }
 }
