@@ -67,4 +67,18 @@ $app->get('/participation/{token}[/]',
         return $resp;
     });
 
+
+
+
+
+
+$app->get('/reservation/item/{id}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->reserverItem($req, $resp, $args);
+    });
+
+
+
+
 $app->run();
