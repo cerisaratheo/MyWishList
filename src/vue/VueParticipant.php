@@ -22,6 +22,10 @@ class VueParticipant
                 break;
             case 3:
                 $contenu = $this->afficherItem();
+                break;
+            case 4:
+                $contenu = $this->afficherFormulaireReservation();
+                break;
         }
         $html = <<<END
 <!DOCTYPE html> 
@@ -70,5 +74,27 @@ END;
 </div>
 END;
 return $html;
+    }
+
+    private function afficherFormulaireReservation() : string {
+        if (isset($_COOKIE[ 'capp_cookie'])) {
+            $p=$_COOKIE['pseudo'];
+        }
+        else {
+            $p="";
+        }
+        $res = "<p>saisissez votre nom/pseudo : <br /></p>";
+        $formulaire = "<form action=\"mywishlist\controleur\ControleurParticipant\" method=\"post\">
+                           <p>
+                                <input type=\"text\" name=\"pseudo\" value=$p/> <input type=\"submit\" value=\"Valider\" />
+                           </p>
+		               </form>";
+        $res = $res.$formulaire;
+        $html = <<<END
+        <div class="formulaireReservation">
+        $res
+        </div>
+END;
+    return $html;
     }
 }
