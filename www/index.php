@@ -44,19 +44,19 @@ $app->get('/testVue/item/{id}[/]',
         return $controleur->getItem($req, $resp, $args);
     });
 
-$app->get('/creation/creer[/]',
+$app->get('/creation/creerListe[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
-        return $controleur->createToken($req, $resp, $args);
+        return $controleur->creerListe($req, $resp, $args);
     });
 
-$app->post('/creation/creer[/]',
+$app->post('/creation/creerListe[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
-        return $controleur->createToken($req, $resp, $args);
+        return $controleur->creerListe($req, $resp, $args);
     });
 
-$app->get('/creation/{token}[/]',
+$app->get('/creation/liste/{token}[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->accederListe($req, $resp, $args);
