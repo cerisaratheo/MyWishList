@@ -39,6 +39,6 @@ class ControleurParticipant
             setcookie("pseudo", '$_POST[\'pseudo\']', time() + 60*60, "mywishlist" ) ;
         }
         $vue = new \mywishlist\vue\VueParticipant();
-        $html = $vue->render( 3 );
+        $html = $vue->render( 4 );
     }
 }
