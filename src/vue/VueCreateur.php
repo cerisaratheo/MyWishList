@@ -85,4 +85,17 @@ END;
     }
 
 
+    private function afficherFormulaireAjoutItem() : string {
+        $html = <<<END
+<form action="ajoutItem" method="POST">
+    <input type="text" name="nomItem" placeholder="<nom>" required>
+    <input type="text" name="descItem" placeholder="<description>" required>
+    <input type="number" name="prixItem" placeholder="<prix>" min="0" required>
+    <input type="url" name="lienItem" placeholder="<lien>">
+    <button type="submmit" name="validerAjoutItem">valider</button>
+</form>
+END;
+        return $html;
+    }
+
 }
