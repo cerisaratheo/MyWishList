@@ -23,14 +23,16 @@ class ControleurCreateur
             $date = $rq->getParsedBody()['expiration'];
 
             // Generation du token de modification
-            $token = $this->genererToken($rq, $rs, $args);
+            $tokenModif = $this->genererToken(1);
+            $tokenParticipation = $this->genererToken(2);
 
             // On sauvegarde la liste dans la BDD
             $liste = new Liste();
             $liste->titre = $titre;
             $liste->description = $desc;
             $liste->expiration = $date;
-            $liste->token_modif = $token;
+            $liste->token_modif = $tokenModif;
+            $liste->token_participation = $tokenParticipation;
             $liste->save();
 
             $vue = new VueCreateur("");
@@ -58,16 +60,25 @@ class ControleurCreateur
         return rs;
     }
 
-    private function genererToken($rq, $rs, $args){
+    private function genererToken($id){
         // On verifie que le token est n'existe pas deja dans la BDD
         do {
-            $token = random_bytes(5);
-            $res = Liste::select('no')
-                    ->where('token_modif',"=",$token)
-                    ->first();
+            switch ($id) {
+                case 1 :
+                    $token = random_bytes(5);
+                    $res = Liste::select('no')
+                        ->where('token_modif',"=",$token)
+                        ->first();
+                    break;
+                case 2 :
+                    $token = random_bytes(5);
+                    $res = Liste::select('no')
+                        ->where('token_participation',"=",$token)
+                        ->first();
+            }
         } while (! is_null($res));
 
-        $url = $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.bin2hex($token);
+        $url =/* $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.*/bin2hex($token);
         return $url;
     }
 
@@ -134,7 +145,7 @@ class ControleurCreateur
             $nom = $rq->getParsedBody()['nomItem'];
             $desc = $rq->getParsedBody()['descItem'];
             $prix = $rq->getParsedBody()['prixItem'];
-            $url = $rq->getParsedBody()['lien'];
+            $url = $rq->getParsedBody()['lienItem'];
 
             $item = new Item();
             $item->liste_id = $numero->no;
