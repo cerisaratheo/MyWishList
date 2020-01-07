@@ -32,11 +32,11 @@ class ControleurParticipant
 
     public function reserverItem($rq, $rs, $args) {
         $vue = new \mywishlist\vue\VueParticipant("");
-        $html = $vue->render( 4 );
+        $html = $vue->render(4);
         $rs->getBody()->write($html);
 
         $listItemsReserves = \mywishlist\models\Reservation::all();
-        if (isset($rq->getParsedBody()['pseudo'])) {
+        if (isset($rq->getParsedBody()['pseudo']) ) {
             $r = new Reservation();
             $r->pseudo = $rq->getParsedBody()['pseudo'];
             $r->id_item = 1;
