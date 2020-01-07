@@ -4,6 +4,7 @@
 namespace mywishlist\controleur;
 
 
+use mywishlist\models\Item;
 use mywishlist\models\Liste;
 use mywishlist\vue\VueCreateur;
 
@@ -38,6 +39,23 @@ class ControleurCreateur
 
         $rs->getBody()->write($html);
         return $rs;
+    }
+
+    public function accederItem($rq, $rs, $args){
+        $token = $args['token'];
+            $liste = Liste::select("*")
+                -> where('token_modif',"=",$token)
+                -> first();
+        if(!is_null($liste)) {
+            $id = $args['id'];
+            $item = Item::select('*')
+                -> where ('list_id','=',$liste->no)
+                -> first();
+            $vue = new VueCreateur($item);
+            $html = $vue->render(4);
+            $rs->getBody()->write($html);
+        }
+        return rs;
     }
 
     private function genererToken($rq, $rs, $args){
@@ -76,21 +94,80 @@ class ControleurCreateur
     public function accederListe($rq, $rs, $args){
         $token = $args['token'];
         $liste = Liste::select("*")
-            -> where('token_modif',"=",$token)
+            -> where('token_modif','=',$token)
             -> first();
 
         // il faudra verifier que l'utilisateur qui veut acceder à cette
         // liste est bien celui qui l'a créé qd l'authentification sera en place
-        if(! is_null($liste)){
-            $vue = new VueCreateur($liste);
+        if (! is_null($liste)) {
+            $items = Item::select("*")
+                -> where('liste_id','=',$liste->no)
+                -> get();
+            $infos = array(
+              'liste' => $liste,
+              'items' => $items
+            );
+            $vue = new VueCreateur($infos);
             $html = $vue->render(2);
             $rs->getBody()->write($html);
+        }
+        else {
+
         }
         return $rs;
     }
 
+    public function modifierListe($rq,$rs,$args){
+        $token = $args['token'];
+        $liste = Liste::select("*")
+            -> where('token_modif',"=",$token)
+            -> first();
+            //pareil qu'accederListe, il faut vérifier l'utilisateur
 
-    public function ajoutItem($rq, $rs, $args){
-        // à faire
+            if(!is_null($liste)){
+                $liste->titre = $rq->getParsedBody()['titre'];
+                $liste->description = $rq->getParsedBody()['desc'];
+                $liste->expiration = $rq->getParsedBody()['expiration'];
+                $liste->save();
+                $vue = new VueCreateur("");
+                $html = $vue->render(0);
+            }
+            else{
+
+            }
+            $rs->getBody()->write($html);
+            return $rs;
+        }
+
+    public function ajoutItem($rq, $rs, $args)
+    {
+        if (!isset($rq->getParsedBody()['nomItem']) || !isset($rq->getParsedBody()['descItem']) || !isset($rq->getParsedBody()['prixItem'])) {
+            $vue = new VueCreateur("");
+            $html = $vue->render(3);
+        } else {
+            $token = $args['token'];
+            $numero = Liste::select("no")
+                ->where('token_modif', '=', $token)
+                ->first();
+
+            // WOW FILTRE / ! \
+            $nom = $rq->getParsedBody()['nomItem'];
+            $desc = $rq->getParsedBody()['descItem'];
+            $prix = $rq->getParsedBody()['prixItem'];
+            $url = $rq->getParsedBody()['lien'];
+
+            $item = new Item();
+            $item->liste_id = $numero->no;
+            $item->nom = $nom;
+            $item->descr = $desc;
+            $item->url = $url;
+            $item->tarif = $prix;
+            $item->save();
+
+            $vue = new VueCreateur("");
+            $html = $vue->render(3);
+        }
+        $rs->getBody()->write($html);
+        return $rs;
     }
 }
