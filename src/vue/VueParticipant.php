@@ -84,7 +84,7 @@ return $html;
             $p="";
         }
         $res = "<p>saisissez votre nom/pseudo : <br /></p>";
-        $formulaire = "<form action=\"mywishlist\controleur\ControleurParticipant\" method=\"post\">
+        $formulaire = "<form action=\"\" method=\"post\">
                            <p>
                                 <input type=\"text\" name=\"pseudo\" value=$p/> <input type=\"submit\" value=\"Valider\" />
                            </p>
