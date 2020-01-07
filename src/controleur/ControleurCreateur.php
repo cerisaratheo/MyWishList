@@ -41,6 +41,10 @@ class ControleurCreateur
         return $rs;
     }
 
+    public function accederItem($rq, $rs, $args){
+
+    }
+
     private function genererToken($rq, $rs, $args){
         // On verifie que le token est n'existe pas deja dans la BDD
         do {
