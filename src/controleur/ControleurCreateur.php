@@ -89,7 +89,20 @@ class ControleurCreateur
         return $rs;
     }
 
+    public function modifierListe($rq,$rs,$args){
+        $token = $args['token'];
+        $liste = Liste::select("*")
+            -> where('token_modif',"=",$token)
+            -> first();
 
+        //pareil qu'accederListe, il faut vérifier l'utilisateur
+
+        if(!is_null($liste)){
+            $liste->titre = $rq->getParsedBody()['titre'];
+            $liste->description = $rq->getParsedBody()['desc'];
+            $liste->expiration = $rq->getParsedBody()['expiration'];
+        }
+    }
     public function ajoutItem($rq, $rs, $args){
         // à faire
     }
