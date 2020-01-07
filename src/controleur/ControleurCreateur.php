@@ -47,15 +47,16 @@ class ControleurCreateur
                 -> where('token_modif',"=",$token)
                 -> first();
         if(!is_null($liste)) {
-            $id = $args['id'];
+            $id = $args['item'];
             $item = Item::select('*')
-                -> where ('list_id','=',$liste->no)
+                -> where ('liste_id','=',$liste->no)
+                -> where ('id','=',$id)
                 -> first();
             $vue = new VueCreateur($item);
             $html = $vue->render(4);
             $rs->getBody()->write($html);
         }
-        return rs;
+        return $rs;
     }
 
     private function genererToken($rq, $rs, $args){
@@ -69,26 +70,6 @@ class ControleurCreateur
 
         $url = $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.bin2hex($token);
         return $url;
-    }
-
-    public function createToken($rq, $rs, $args){
-        if (isset($rq->getParsedBody()['token']))
-            $id = $rq->getParsedBody()['token'];
-        else
-            $id =  0;
-        if ($id == 1 /*&& et liste remplie*/) {
-            $token = random_bytes(5);
-            $token = $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.bin2hex($token);
-            $vue = new VueCreateur($token);
-            $html = $vue->render( 1 );
-        }
-
-        else {
-            $vue = new VueCreateur("");
-            $html = $vue->render(1);
-        }
-        $rs->getBody()->write($html);
-        return $rs;
     }
 
     public function accederListe($rq, $rs, $args){
