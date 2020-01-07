@@ -24,6 +24,9 @@ class VueCreateur
             case 2 :
                 $contenu = $this->afficherListe();
                 break;
+            case 3 :
+                $contenu = $this->afficherFormulaireAjoutItem();
+                break;
         }
         $html = <<<END
 <!DOCTYPE html> 
@@ -90,11 +93,11 @@ END;
 
     private function afficherFormulaireAjoutItem() : string {
         $html = <<<END
-<form action="ajoutItem" method="POST">
-    <input type="text" name="nomItem" placeholder="<nom>" required>
-    <input type="text" name="descItem" placeholder="<description>" required>
-    <input type="number" name="prixItem" placeholder="<prix>" min="0" required>
-    <input type="url" name="lienItem" placeholder="<lien>">
+<form action="ajouterItem" method="POST">
+    <input type="text" name="nomItem" placeholder="nom" required><br>
+    <input type="text" name="descItem" placeholder="description" required><br>
+    <input type="number" name="prixItem" placeholder="prix" min="0" step="0.01" required><br>
+    <input type="url" name="lienItem" placeholder="lien"><br>
     <button type="submmit" name="validerAjoutItem">valider</button>
 </form>
 END;

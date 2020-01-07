@@ -101,7 +101,35 @@ class ControleurCreateur
     }
 
 
-    public function ajoutItem($rq, $rs, $args){
-        // à faire
+    public function ajoutItem($rq, $rs, $args)
+    {
+        if (!isset($rq->getParsedBody()['nomItem']) || !isset($rq->getParsedBody()['descItem']) || !isset($rq->getParsedBody()['prixItem'])) {
+            $vue = new VueCreateur("");
+            $html = $vue->render(3);
+        } else {
+            $token = $args['token'];
+            $numero = Liste::select("no")
+                ->where('token_modif', '=', $token)
+                ->first();
+
+            // WOW FILTRE / ! \
+            $nom = $rq->getParsedBody()['nomItem'];
+            $desc = $rq->getParsedBody()['descItem'];
+            $prix = $rq->getParsedBody()['prixItem'];
+            $url = $rq->getParsedBody()['lien'];
+
+            $item = new Item();
+            $item->liste_id = $numero->no;
+            $item->nom = $nom;
+            $item->descr = $desc;
+            $item->url = $url;
+            $item->tarif = $prix;
+            $item->save();
+
+            $vue = new VueCreateur("");
+            $html = $vue->render(3);
+        }
+        $rs->getBody()->write($html);
+        return $rs;
     }
 }

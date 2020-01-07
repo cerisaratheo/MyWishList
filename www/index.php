@@ -67,8 +67,17 @@ $app->get('/participation/{token}[/]',
         return $resp;
     });
 
+$app->get('/creation/{token}/ajouterItem[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->ajoutItem($req, $resp, $args);
+    });
 
-
+$app->post('/creation/{token}/ajouterItem[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->ajoutItem($req, $resp, $args);
+    });
 
 
 
