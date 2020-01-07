@@ -60,11 +60,14 @@ END;
     }
 
     private function afficherListe() : string {
-        $titre = $this->elem->titre;
-
-        $html = <<<END
+        $titre = $this->elem['liste']->titre;
+        $items = '';
+        foreach ($this->elem['items'] as $item)
+            $items = $items . '<p>'.$item->nom.'</p>';
+$html = <<<END
 <div class="liste"> 
     <h1>$titre</h1>
+    <div>$items</div>
 </div>
 END;
         return $html;
