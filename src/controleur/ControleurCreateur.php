@@ -4,6 +4,7 @@
 namespace mywishlist\controleur;
 
 
+use mywishlist\models\Item;
 use mywishlist\models\Liste;
 use mywishlist\vue\VueCreateur;
 
@@ -76,13 +77,20 @@ class ControleurCreateur
     public function accederListe($rq, $rs, $args){
         $token = $args['token'];
         $liste = Liste::select("*")
-            -> where('token_modif',"=",$token)
+            -> where('token_modif','=',$token)
             -> first();
+        $items = Item::select("*")
+            -> where('liste_id','=',$liste->no)
+            -> get();
 
         // il faudra verifier que l'utilisateur qui veut acceder à cette
         // liste est bien celui qui l'a créé qd l'authentification sera en place
-        if(! is_null($liste)){
-            $vue = new VueCreateur($liste);
+        if (! is_null($liste)) {
+            $infos = array(
+              'liste' => $liste,
+              'items' => $items
+            );
+            $vue = new VueCreateur($infos);
             $html = $vue->render(2);
             $rs->getBody()->write($html);
         }
