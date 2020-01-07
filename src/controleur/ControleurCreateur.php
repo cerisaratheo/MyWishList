@@ -41,6 +41,23 @@ class ControleurCreateur
         return $rs;
     }
 
+    public function accederItem($rq, $rs, $args){
+        $token = $args['token'];
+            $liste = Liste::select("*")
+                -> where('token_modif',"=",$token)
+                -> first();
+        if(!is_null($liste)) {
+            $id = $args['id'];
+            $item = Item::select('*')
+                -> where ('list_id','=',$liste->no)
+                -> first();
+            $vue = new VueCreateur($item);
+            $html = $vue->render(4);
+            $rs->getBody()->write($html);
+        }
+        return rs;
+    }
+
     private function genererToken($rq, $rs, $args){
         // On verifie que le token est n'existe pas deja dans la BDD
         do {
@@ -100,6 +117,27 @@ class ControleurCreateur
         return $rs;
     }
 
+    public function modifierListe($rq,$rs,$args){
+        $token = $args['token'];
+        $liste = Liste::select("*")
+            -> where('token_modif',"=",$token)
+            -> first();
+            //pareil qu'accederListe, il faut vérifier l'utilisateur
+
+            if(!is_null($liste)){
+                $liste->titre = $rq->getParsedBody()['titre'];
+                $liste->description = $rq->getParsedBody()['desc'];
+                $liste->expiration = $rq->getParsedBody()['expiration'];
+                $liste->save();
+                $vue = new VueCreateur("");
+                $html = $vue->render(0);
+            }
+            else{
+
+            }
+            $rs->getBody()->write($html);
+            return $rs;
+        }
 
     public function ajoutItem($rq, $rs, $args)
     {
