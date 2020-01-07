@@ -42,7 +42,20 @@ class ControleurCreateur
     }
 
     public function accederItem($rq, $rs, $args){
-
+        $token = $args['token']
+            $liste = Liste::select("*")
+                -> where('token_modif',"=",$token)
+                -> first();
+        if(!is_null($liste)) {
+            $id = $args['id'];
+            $item = Item::select('*')
+                -> where ('list_id','=',$liste->no)
+                -> first();
+            $vue = new VueCreateur($item);
+            $html = $vue->render(4);
+            $rs->getBody()->write($html);
+        }
+        return rs;
     }
 
     private function genererToken($rq, $rs, $args){
