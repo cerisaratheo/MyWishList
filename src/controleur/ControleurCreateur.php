@@ -79,13 +79,13 @@ class ControleurCreateur
         $liste = Liste::select("*")
             -> where('token_modif','=',$token)
             -> first();
-        $items = Item::select("*")
-            -> where('liste_id','=',$liste->no)
-            -> get();
 
         // il faudra verifier que l'utilisateur qui veut acceder à cette
         // liste est bien celui qui l'a créé qd l'authentification sera en place
         if (! is_null($liste)) {
+            $items = Item::select("*")
+                -> where('liste_id','=',$liste->no)
+                -> get();
             $infos = array(
               'liste' => $liste,
               'items' => $items
@@ -93,6 +93,9 @@ class ControleurCreateur
             $vue = new VueCreateur($infos);
             $html = $vue->render(2);
             $rs->getBody()->write($html);
+        }
+        else {
+
         }
         return $rs;
     }
