@@ -129,7 +129,15 @@ class ControleurCreateur
             $liste->titre = $rq->getParsedBody()['titre'];
             $liste->description = $rq->getParsedBody()['desc'];
             $liste->expiration = $rq->getParsedBody()['expiration'];
+            $liste->save();
+            $vue = new VueCreateur("");
+            $html = $vue->render(0);
         }
+        else{
+
+        }
+        $rs->getBody()->write($html);
+        return $rs;
     }
     public function ajoutItem($rq, $rs, $args){
         // à faire

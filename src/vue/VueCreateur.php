@@ -37,7 +37,7 @@ END;
 
     private function creerListe() : string {
         $html = <<<END
-<h2>Ctéation d'une liste de souhaits</h2>
+<h2>Création d'une liste de souhaits</h2>
 <form  action="creerListe" method="post">
     <div class="formLise">
         <label for="titre">Titre :</label>
@@ -57,6 +57,29 @@ END;
 </form>
 END;
         return $html;
+    }
+    private function modifierListe() : string {
+        $html = <<<END
+<h2>Modification d'une liste de souhaits</h2>
+<form  action="modifierListe" method="post">
+    <div class="formLise">
+        <label for="titre">Titre :</label>
+        <input type="text" name="titre" required>
+    </div>
+    <div class="formLise">
+        <label for="desc">Description :</label>
+        <input type="text" name="desc" required>
+    </div>
+    <div class="formLise">
+        <label for="expiration">Date d'expiration :</label>
+        <input type="date" name="expiration" required>
+    </div>
+    <div class="formLise">
+        <input type="submit" value="Modifier">
+    </div>
+</form>
+END;
+    return $html;
     }
 
     private function afficherListe() : string {
