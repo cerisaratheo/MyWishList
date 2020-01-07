@@ -47,15 +47,16 @@ class ControleurCreateur
                 -> where('token_modif',"=",$token)
                 -> first();
         if(!is_null($liste)) {
-            $id = $args['id'];
+            $id = $args['item'];
             $item = Item::select('*')
-                -> where ('list_id','=',$liste->no)
+                -> where ('liste_id','=',$liste->no)
+                -> where ('id','=',$id)
                 -> first();
             $vue = new VueCreateur($item);
             $html = $vue->render(4);
             $rs->getBody()->write($html);
         }
-        return rs;
+        return $rs;
     }
 
     private function genererToken($rq, $rs, $args){

@@ -85,6 +85,11 @@ $app->post('/creation/{token}/ajouterItem[/]',
         return $controleur->ajoutItem($req, $resp, $args);
     });
 
+$app->get('/creation/liste/{token}/{item}[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->accederItem($req, $resp, $args);
+    });
 
 
 $app->get('/reservation/item/{id}[/]',
