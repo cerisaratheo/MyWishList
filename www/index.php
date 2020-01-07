@@ -98,6 +98,12 @@ $app->get('/reservation/item/{id}[/]',
         return $controleur->reserverItem($req, $resp, $args);
     });
 
+$app->post("/reservation/item/{id}[/]",
+    function($req, $resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->reserverItem($req, $resp, $args);
+    });
+
 
 
 
