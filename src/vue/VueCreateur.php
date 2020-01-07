@@ -27,6 +27,9 @@ class VueCreateur
             case 3 :
                 $contenu = $this->afficherFormulaireAjoutItem();
                 break;
+            case 4 :
+                $contenu= $this->afficherItem();
+                break;
         }
         $html = <<<END
 <!DOCTYPE html> 
@@ -89,11 +92,25 @@ END;
         $titre = $this->elem['liste']->titre;
         $items = '';
         foreach ($this->elem['items'] as $item)
-            $items = $items . '<p>'.$item->nom.'</p>';
+            $items = $items . '<p>'.$item->id.' - '.$item->nom.'</p>';
 $html = <<<END
 <div class="liste"> 
     <h1>$titre</h1>
     <div>$items</div>
+</div>
+END;
+        return $html;
+    }
+
+    private function afficherItem() : string {
+        $nom = $this->elem->nom ;
+        $descr = $this->elem->descr;
+        $img = 'Pas d\'image pour l\'instant';
+        $html = <<<END
+<div class="item"> 
+    <h3>$nom :</h3>
+    <p>$descr</p>
+    <p>$img</p>
 </div>
 END;
         return $html;

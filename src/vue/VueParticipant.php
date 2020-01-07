@@ -78,7 +78,8 @@ return $html;
 
     private function afficherFormulaireReservation() : string {
         if (isset($_COOKIE[ 'capp_cookie'])) {
-            $p=$_COOKIE['pseudo'];
+            //$p=$_COOKIE['pseudo'];
+            $p="";
         }
         else {
             $p="";
@@ -86,7 +87,7 @@ return $html;
         $res = "<p>saisissez votre nom/pseudo : <br /></p>";
         $formulaire = "<form action=\"\" method=\"post\">
                            <p>
-                                <input type=\"text\" name=\"pseudo\" value=$p/> <input type=\"submit\" value=\"Valider\" />
+                                <input type=\"text\" name=\"pseudo\" value=$p> <input type=\"submit\" value=\"Valider\" />
                            </p>
 		               </form>";
         $res = $res.$formulaire;
