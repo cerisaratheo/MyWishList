@@ -33,19 +33,20 @@ class ControleurParticipant
     public function reserverItem($rq, $rs, $args) {
         $id = $args['id'];
         $item = \mywishlist\models\Item::find($id);
-        $vue = new \mywishlist\vue\VueParticipant([$item]);
+        $vue = new \mywishlist\vue\VueParticipant("");
         $html = $vue->render(4);
         $rs->getBody()->write($html);
+        $pseudo=$rq->getParsedBody()['pseudo'];
 
         $listItemsReserves = \mywishlist\models\Reservation::all();
-        if (isset($rq->getParsedBody()['pseudo']) ) {
+        if (isset($pseudo) ) {
             $r = new Reservation();
-            $r->pseudo = $rq->getParsedBody()['pseudo'];
+            $r->pseudo = $pseudo;
             $r->id_item = $id;
             $r->save();
         }
         if(!isset($_COOKIE['pseudo'])){ // Teste si le cookie n'existe pas
-            setcookie('pseudo', '$rq->getParsedBody()[\'pseudo\']', time() + 60*60, "mywishlist" );
+            setcookie("pseudo", $pseudo, time() + 60*60, "mywishlist" );
         }
         return $rs;
     }
