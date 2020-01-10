@@ -6,6 +6,7 @@ namespace mywishlist\controleur;
 
 use mywishlist\models\Item;
 use mywishlist\models\Liste;
+use mywishlist\models\Utilisateur;
 use mywishlist\vue\VueCreateur;
 
 class ControleurCreateur
@@ -110,10 +111,19 @@ class ControleurCreateur
     }
 
     public function modifierListe($rq,$rs,$args){
-        $token = $args['token'];
-        $liste = Liste::select("*")
-            -> where('token_modif',"=",$token)
-            -> first();
+        $vue = new VueCreateur("");
+        $html = $vue->render(6);
+        if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
+            $token = $args['token'];
+            $vue = new VueCreateur($token);
+            $html = $vue->render(6);
+        }
+        else{
+
+            $token = $args['token'];
+            $liste = Liste::select("*")
+                -> where('token_modif',"=",$token)
+                -> first();
             //pareil qu'accederListe, il faut vérifier l'utilisateur
 
             if(!is_null($liste)){
@@ -122,13 +132,12 @@ class ControleurCreateur
                 $liste->expiration = $rq->getParsedBody()['expiration'];
                 $liste->save();
                 $vue = new VueCreateur("");
-                $html = $vue->render(0);
+                $html = $vue->render(6);
             }
-            else{
 
-            }
-            $rs->getBody()->write($html);
-            return $rs;
+        }
+        $rs->getBody()->write($html);
+        return $rs;
         }
 
     public function ajoutItem($rq, $rs, $args)
@@ -159,6 +168,26 @@ class ControleurCreateur
             $vue = new VueCreateur("");
             $html = $vue->render(3);
         }
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+    public function creerCompte($rq, $rs, $args){
+        if (! isset($rq->getParsedBody()['username'])){
+            $vue = new VueCreateur("");
+            $html = $vue->render(5);
+        }
+        else {
+            // A filter !
+            $pseudo = $rq->getParsedBody()['username'];
+            $mdp = $rq->getParsedBody()['password'];
+
+            Authentification::createUser($pseudo, $mdp);
+
+            $vue = new VueCreateur("");
+            $html = $vue->render(5);
+        }
+
         $rs->getBody()->write($html);
         return $rs;
     }
@@ -199,5 +228,4 @@ class ControleurCreateur
         $rs->getBody()->write($html);
         return $rs;
     }
-
 }

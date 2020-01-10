@@ -56,7 +56,13 @@ $app->post('/creation/creerListe[/]',
         return $controleur->creerListe($req, $resp, $args);
     });
 
-$app->post('/creation/modifierListe[/]',
+$app->get('/creation/modifierListe/{token}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierListe($req, $resp, $args);
+    });
+
+$app->post('/creation/modifierListe/{token}[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierListe($req, $resp, $args);
@@ -91,6 +97,17 @@ $app->get('/creation/liste/{token}/{item}[/]',
         return $controleur->accederItem($req, $resp, $args);
     });
 
+$app->get('/compte/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
+
+$app->post('/compte/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
 
 $app->get('/reservation/item/{id}[/]',
     function($req, $resp, $args) {
