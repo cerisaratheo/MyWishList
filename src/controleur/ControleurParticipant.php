@@ -33,7 +33,7 @@ class ControleurParticipant
     public function reserverItem($rq, $rs, $args) {
         $id = $args['id'];
         $item = \mywishlist\models\Item::find($id);
-        $vue = new \mywishlist\vue\VueParticipant([$item]);
+        $vue = new \mywishlist\vue\VueParticipant("");
         $html = $vue->render(4);
         $rs->getBody()->write($html);
         $pseudo=$rq->getParsedBody()['pseudo'];
