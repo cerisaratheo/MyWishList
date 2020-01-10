@@ -56,7 +56,13 @@ $app->post('/creation/creerListe[/]',
         return $controleur->creerListe($req, $resp, $args);
     });
 
-$app->post('/creation/modifierListe[/]',
+$app->get('/creation/modifierListe/{token}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierListe($req, $resp, $args);
+    });
+
+$app->post('/creation/modifierListe/{token}[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierListe($req, $resp, $args);

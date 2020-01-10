@@ -32,10 +32,12 @@ class VueCreateur
                 break;
             case 5 :
                 $contenu = $this->afficherFromulaireInscription();
+            case 6 :
+                $contenu = $this->modifierListe()
         }
         $html = <<<END
-<!DOCTYPE html> 
-<body>  
+<!DOCTYPE html>
+<body>
     $contenu
 </body>
 <html>
@@ -68,9 +70,10 @@ END;
     }
 
     private function modifierListe() : string {
+        $token = $this->elem;
         $html = <<<END
 <h2>Modification d'une liste de souhaits</h2>
-<form  action="modifierListe" method="post">
+<form  action="$token" method="post">
     <div class="formLise">
         <label for="titre">Titre :</label>
         <input type="text" name="titre" required>
@@ -97,7 +100,7 @@ END;
         foreach ($this->elem['items'] as $item)
             $items = $items . '<p>'.$item->id.' - '.$item->nom.'</p>';
 $html = <<<END
-<div class="liste"> 
+<div class="liste">
     <h1>$titre</h1>
     <div>$items</div>
 </div>
@@ -110,7 +113,7 @@ END;
         $descr = $this->elem->descr;
         $img = 'Pas d\'image pour l\'instant';
         $html = <<<END
-<div class="item"> 
+<div class="item">
     <h3>$nom :</h3>
     <p>$descr</p>
     <p>$img</p>
@@ -126,7 +129,7 @@ END;
     Générer le lien de partage
   </button>
 </form>
-<div class="items"> 
+<div class="items">
     <p>Token : $this->elem</p>
 </div>
 END;

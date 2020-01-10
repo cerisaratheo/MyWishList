@@ -77,7 +77,7 @@ return $html;
     }
 
     private function afficherFormulaireReservation() : string {
-        if (isset($_COOKIE['capp_cookie'])) {
+        if (isset($_COOKIE['pseudo'])) {
             $p=$_COOKIE['pseudo'];
         }
         else {

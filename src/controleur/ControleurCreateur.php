@@ -111,10 +111,19 @@ class ControleurCreateur
     }
 
     public function modifierListe($rq,$rs,$args){
-        $token = $args['token'];
-        $liste = Liste::select("*")
-            -> where('token_modif',"=",$token)
-            -> first();
+        $vue = new VueCreateur("");
+        $html = $vue->render(6);
+        if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
+            $token = $args['token'];
+            $vue = new VueCreateur($token);
+            $html = $vue->render(6);
+        }
+        else{
+
+            $token = $args['token'];
+            $liste = Liste::select("*")
+                -> where('token_modif',"=",$token)
+                -> first();
             //pareil qu'accederListe, il faut vérifier l'utilisateur
 
             if(!is_null($liste)){
@@ -123,13 +132,12 @@ class ControleurCreateur
                 $liste->expiration = $rq->getParsedBody()['expiration'];
                 $liste->save();
                 $vue = new VueCreateur("");
-                $html = $vue->render(0);
+                $html = $vue->render(6);
             }
-            else{
 
-            }
-            $rs->getBody()->write($html);
-            return $rs;
+        }
+        $rs->getBody()->write($html);
+        return $rs;
         }
 
     public function ajoutItem($rq, $rs, $args)
