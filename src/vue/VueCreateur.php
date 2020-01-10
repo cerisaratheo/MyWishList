@@ -32,8 +32,11 @@ class VueCreateur
                 break;
             case 5 :
                 $contenu = $this->afficherFromulaireInscription();
+                break;
             case 6 :
-                $contenu = $this->modifierListe()
+                $contenu = $this->modifierListe();
+                break;
+
         }
         $html = <<<END
 <!DOCTYPE html>
