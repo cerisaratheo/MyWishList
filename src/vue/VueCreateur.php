@@ -30,6 +30,9 @@ class VueCreateur
             case 4 :
                 $contenu= $this->afficherItem();
                 break;
+            case 5 :
+                $contenu= $this->modifierListe();
+                break;
         }
         $html = <<<END
 <!DOCTYPE html> 
@@ -65,9 +68,10 @@ END;
         return $html;
     }
     private function modifierListe() : string {
+        $token = $this->elem;
         $html = <<<END
 <h2>Modification d'une liste de souhaits</h2>
-<form  action="modifierListe" method="post">
+<form  action="$token" method="post">
     <div class="formLise">
         <label for="titre">Titre :</label>
         <input type="text" name="titre" required>
