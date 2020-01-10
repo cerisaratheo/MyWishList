@@ -17,7 +17,7 @@ class Authentification
         $newUser = new Utilisateur();
         $newUser->username = $userName;
         $newUser->password = $hash;
-        //$newUser->role = ?;
+        $newUser->role = 100;
         $newUser->save();
     }
 

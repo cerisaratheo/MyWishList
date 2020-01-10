@@ -91,6 +91,17 @@ $app->get('/creation/liste/{token}/{item}[/]',
         return $controleur->accederItem($req, $resp, $args);
     });
 
+$app->get('/compte/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
+
+$app->post('/compte/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
 
 $app->get('/reservation/item/{id}[/]',
     function($req, $resp, $args) {

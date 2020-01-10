@@ -6,6 +6,7 @@ namespace mywishlist\controleur;
 
 use mywishlist\models\Item;
 use mywishlist\models\Liste;
+use mywishlist\models\Utilisateur;
 use mywishlist\vue\VueCreateur;
 
 class ControleurCreateur
@@ -159,6 +160,26 @@ class ControleurCreateur
             $vue = new VueCreateur("");
             $html = $vue->render(3);
         }
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+    public function creerCompte($rq, $rs, $args){
+        if (! isset($rq->getParsedBody()['username'])){
+            $vue = new VueCreateur("");
+            $html = $vue->render(5);
+        }
+        else {
+            // A filter !
+            $pseudo = $rq->getParsedBody()['username'];
+            $mdp = $rq->getParsedBody()['password'];
+
+            Authentification::createUser($pseudo, $mdp);
+
+            $vue = new VueCreateur("");
+            $html = $vue->render(5);
+        }
+
         $rs->getBody()->write($html);
         return $rs;
     }

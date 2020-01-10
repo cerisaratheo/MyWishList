@@ -28,8 +28,10 @@ class VueCreateur
                 $contenu = $this->afficherFormulaireAjoutItem();
                 break;
             case 4 :
-                $contenu= $this->afficherItem();
+                $contenu = $this->afficherItem();
                 break;
+            case 5 :
+                $contenu = $this->afficherFromulaireInscription();
         }
         $html = <<<END
 <!DOCTYPE html> 
@@ -64,6 +66,7 @@ END;
 END;
         return $html;
     }
+
     private function modifierListe() : string {
         $html = <<<END
 <h2>Modification d'une liste de souhaits</h2>
@@ -130,7 +133,6 @@ END;
         return $html;
     }
 
-
     private function afficherFormulaireAjoutItem() : string {
         $html = <<<END
 <form action="ajouterItem" method="POST">
@@ -139,6 +141,26 @@ END;
     <input type="number" name="prixItem" placeholder="prix" min="0" step="0.01" required><br>
     <input type="url" name="lienItem" placeholder="lien"><br>
     <button type="submmit" name="validerAjoutItem">valider</button>
+</form>
+END;
+        return $html;
+    }
+
+    private function afficherFromulaireInscription() : string {
+        $html = <<<END
+<h2>Inscription</h2>
+<form  action="" method="post">
+    <div class="formLigne">
+        <label for="">Username:</label>
+        <input type="text" name="username" required>
+    </div>
+    <div class="formLigne">
+        <label for="desc">Password :</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class="formLigne">
+        <input type="submit" value="Valider">
+    </div>
 </form>
 END;
         return $html;
