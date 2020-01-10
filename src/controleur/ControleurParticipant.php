@@ -39,9 +39,9 @@ class ControleurParticipant
         $pseudo=$rq->getParsedBody()['pseudo'];
 
         $listItemsReserves = \mywishlist\models\Reservation::all();
-        if (isset($rq->getParsedBody()['pseudo']) ) {
+        if (isset($pseudo) ) {
             $r = new Reservation();
-            $r->pseudo = $rq->getParsedBody()['pseudo'];
+            $r->pseudo = $pseudo;
             $r->id_item = $id;
             $r->save();
         }
