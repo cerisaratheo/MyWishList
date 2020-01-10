@@ -36,6 +36,7 @@ class ControleurParticipant
         $vue = new \mywishlist\vue\VueParticipant([$item]);
         $html = $vue->render(4);
         $rs->getBody()->write($html);
+        $pseudo=$rq->getParsedBody()['pseudo'];
 
         $listItemsReserves = \mywishlist\models\Reservation::all();
         if (isset($rq->getParsedBody()['pseudo']) ) {
@@ -45,7 +46,7 @@ class ControleurParticipant
             $r->save();
         }
         if(!isset($_COOKIE['pseudo'])){ // Teste si le cookie n'existe pas
-            setcookie('pseudo', '$rq->getParsedBody()[\'pseudo\']', time() + 60*60, "mywishlist" );
+            setcookie("pseudo", $pseudo, time() + 60*60, "mywishlist" );
         }
         return $rs;
     }
