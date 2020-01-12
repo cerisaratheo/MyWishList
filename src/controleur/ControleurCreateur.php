@@ -47,7 +47,7 @@ class ControleurCreateur
     public function accederItem($rq, $rs, $args){
         $token = $args['token'];
             $liste = Liste::select("*")
-                -> where('token_modif',"=",$token)
+            -> where('token_modif',"=",$token)
                 -> first();
         if(!is_null($liste)) {
             $id = $args['item'];
@@ -207,7 +207,43 @@ class ControleurCreateur
             $vue = new VueCreateur($etat);
             $html = $vue->render(7);
         }
+        $rs->getBody()->write($html);
+        return $rs;
+    }
 
+    public function modifierItem($rq, $rs, $args)
+    {
+        $idItem = $args['item'];
+         $item = Item::where('id', '=', $idItem)
+             ->firstOrFail();
+
+
+            // WOW FILTRE / ! \
+        $nom = $rq->getParsedBody()['nomItem'];
+        $desc = $rq->getParsedBody()['descItem'];
+        $prix = $rq->getParsedBody()['prixItem'];
+        $url = $rq->getParsedBody()['lienItem'];
+        if(!($nom === ""))
+            $item->nom = $nom;
+        if(!($desc === ""))
+            $item->descr = $desc;
+        if(!($url === ""))
+            $item->url = $url;
+        if(!($prix === ""))
+            $item->tarif = $prix;
+        $item->save();
+
+        $info = array(
+            'id' => $item->id,
+            'nom' => $item->nom,
+            'desc' => $item->descr,
+            'prix' => $item->tarif,
+            'lien' => $item->url
+        );
+
+
+            $vue = new VueCreateur($info);
+            $html = $vue->render(8);
         $rs->getBody()->write($html);
         return $rs;
     }

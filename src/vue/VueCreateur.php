@@ -37,8 +37,10 @@ class VueCreateur
                 $contenu = $this->modifierListe();
                 break;
             case 7 :
-                $contenu =$this->afficherFromulaireConnexion();
+                $contenu = $this->afficherFromulaireConnexion();
                 break;
+            case 8 :
+                $contenu = $this->afficherFormulaireModifierItem();
 
         }
         $html = <<<END
@@ -102,9 +104,10 @@ END;
 
     private function afficherListe() : string {
         $titre = $this->elem['liste']->titre;
+        $token = $this->elem['liste']->token_modif;
         $items = '';
         foreach ($this->elem['items'] as $item)
-            $items = $items . '<p>'.$item->id.' - '.$item->nom.'</p>';
+            $items = $items . '<p><a href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
 <div class="liste">
     <h1>$titre</h1>
@@ -200,5 +203,24 @@ $erreur
 END;
         return $html;
     }
+
+    private function afficherFormulaireModifierItem() : string {
+        $idItem = $this->elem['id'];
+        $nom = $this->elem['nom'];
+        $desc = $this->elem['desc'];
+        $prix = $this->elem['prix'];
+        $lien = $this->elem['lien'];
+
+        $html = <<<END
+<form action="$idItem" method="POST">
+    <input type="text" name="nomItem" placeholder="$nom"><br>
+    <input type="text" name="descItem" placeholder="$desc"><br>
+    <input type="number" name="prixItem" placeholder="$prix" min="0" step="0.01"><br>
+    <input type="url" name="lienItem" placeholder="$lien"><br>
+    <button type="submmit" name="validerAjoutItem">valider</button>
+</form>
+END;
+        return $html;
+  }
 
 }
