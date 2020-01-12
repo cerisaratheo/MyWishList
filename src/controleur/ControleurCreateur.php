@@ -191,4 +191,24 @@ class ControleurCreateur
         $rs->getBody()->write($html);
         return $rs;
     }
+
+    public function seConnecter($rq, $rs, $args) {
+        if (! isset($rq->getParsedBody()['username'])){
+            $vue = new VueCreateur(true);
+            $html = $vue->render(7);
+        }
+        else {
+            // A filter !
+            $pseudo = $rq->getParsedBody()['username'];
+            $mdp = $rq->getParsedBody()['password'];
+
+            $etat = Authentification::authenticate($pseudo, $mdp);
+
+            $vue = new VueCreateur($etat);
+            $html = $vue->render(7);
+        }
+
+        $rs->getBody()->write($html);
+        return $rs;
+    }
 }

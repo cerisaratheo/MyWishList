@@ -36,6 +36,9 @@ class VueCreateur
             case 6 :
                 $contenu = $this->modifierListe();
                 break;
+            case 7 :
+                $contenu =$this->afficherFromulaireConnexion();
+                break;
 
         }
         $html = <<<END
@@ -155,6 +158,32 @@ END;
     private function afficherFromulaireInscription() : string {
         $html = <<<END
 <h2>Inscription</h2>
+<form  action="" method="post">
+    <div class="formLigne">
+        <label for="">Username:</label>
+        <input type="text" name="username" required>
+    </div>
+    <div class="formLigne">
+        <label for="desc">Password :</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class="formLigne">
+        <input type="submit" value="Valider">
+    </div>
+</form>
+END;
+        return $html;
+    }
+
+    private function afficherFromulaireConnexion() : string {
+
+        $erreur = "";
+        if ($this->elem == false)
+            $erreur = "<h3>Mot de passe ou nom d'utilisateur incorrect(s)</h3>";
+
+        $html = <<<END
+<h2>Connexion</h2>
+$erreur
 <form  action="" method="post">
     <div class="formLigne">
         <label for="">Username:</label>
