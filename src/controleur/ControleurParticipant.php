@@ -30,6 +30,21 @@ class ControleurParticipant
         return $rs;
     }
 
+    public function afficherFormulaireReservation($rq, $rs, $args)
+    {
+        $id = $args['id'];
+        $item = \mywishlist\models\Item::find($id);
+        $ir = \mywishlist\models\Reservation::find($id);
+        $vue = new \mywishlist\vue\VueParticipant("");
+        if (isset($ir)) {
+            echo "L'item est déjà réservé.";
+        }
+        else {
+            $html = $vue->render(4);
+            $rs->getBody()->write($html);
+        }
+        return $rs;
+    }
     public function reserverItem($rq, $rs, $args)
     {
         $id = $args['id'];
@@ -37,9 +52,19 @@ class ControleurParticipant
         $vue = new \mywishlist\vue\VueParticipant("");
         $html = $vue->render(4);
         $rs->getBody()->write($html);
-        $pseudo="";
+        if (isset($_COOKIE['pseudo']))
+            $pseudo=$_COOKIE['pseudo'];
+        else
+            $pseudo = "";
         if (isset($rq->getParsedBody()['pseudo'])) {
             $pseudo = $rq->getParsedBody()['pseudo'];
+        }
+
+        if (isset($rq->getParsedBody()['message'])) {
+            $message = $rq->getParsedBody()['message'];
+        }
+        else {
+            $message = "";
         }
 
         $ir = \mywishlist\models\Reservation::find($id);
@@ -47,6 +72,7 @@ class ControleurParticipant
             $r = new Reservation();
             $r->pseudo = $pseudo;
             $r->id_item = $id;
+            $r->message = $message;
             $r->save();
         }
         if (!isset($_COOKIE['pseudo']) && isset($pseudo) || $pseudo != $_COOKIE['pseudo']) { // Teste si le cookie n'existe pas

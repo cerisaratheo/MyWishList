@@ -112,7 +112,7 @@ $app->post('/compte/inscription[/]',
 $app->get('/reservation/item/{id}[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurParticipant($this);
-        return $controleur->reserverItem($req, $resp, $args);
+        return $controleur->afficherFormulaireReservation($req, $resp, $args);
     });
 
 $app->post("/reservation/item/{id}[/]",

@@ -85,9 +85,17 @@ return $html;
         }
         $res = "<p>saisissez votre nom/pseudo : <br /></p>";
         $formulaire = "<form action=\"\" method=\"post\">
-                           <p>
-                                <input type=\"text\" name=\"pseudo\" value=$p> <input type=\"submit\" value=\"Valider\" />
-                           </p>
+                           <div class=\"formLise\">
+                                <input type=\"text\" name=\"pseudo\" value='$p' required>
+                           </div>
+                           <div class=\"formLise\">
+                                <p>saisissez votre message (facultatif) : <br /></p>
+                                <input type=\"text\" name=\"message\">
+                           </div>
+                           <div class=\"formLise\">
+                                <p><br /></p>
+                                <input type=\"submit\" value=\"Valider\" />
+                           </div>
 		               </form>";
         $res = $res.$formulaire;
         $html = <<<END
