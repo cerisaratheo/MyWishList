@@ -24,10 +24,14 @@ class Authentification
     public static function authenticate( $username, $password){
         $user = Utilisateur::select('*')
             ->where("username","=",$username)
-            ->get();
-        if (password_verify($password, $user->password)) {
-            self::loadProfile($user);
-        }
+            ->first();
+
+        if (is_null($user)) return false;
+            if (password_verify($password, $user->password)) {
+                self::loadProfile($user);
+                return true;
+            }
+            else return false;
     }
 
     private static function loadProfile($user){

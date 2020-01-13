@@ -11,6 +11,8 @@ use mywishlist\bd\Eloquent;
 use\Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+session_start();
+
 Eloquent::start('../src/conf/conf.ini');
 
 $configuration = [
@@ -20,6 +22,11 @@ $configuration = [
 ];
 $c=new\Slim\Container($configuration);
 $app = new \Slim\App($c);
+
+
+//////////////////////////////////////////
+////          TESTS                   ////
+//////////////////////////////////////////
 
 $app->get('/liste[/]',
     function(Request$req, Response$resp, $args) {
@@ -43,6 +50,11 @@ $app->get('/testVue/item/{id}[/]',
         $controleur = new ControleurParticipant($this);
         return $controleur->getItem($req, $resp, $args);
     });
+
+
+//////////////////////////////////////////
+////          CREATION                ////
+//////////////////////////////////////////
 
 $app->get('/creation/creerListe[/]',
     function($req, $resp, $args) {
@@ -97,17 +109,38 @@ $app->get('/creation/liste/{token}/{item}[/]',
         return $controleur->accederItem($req, $resp, $args);
     });
 
-$app->get('/compte/inscription[/]',
+//////////////////////////////////////////
+////              COMPTES             ////
+//////////////////////////////////////////
+
+$app->get('/inscription[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->creerCompte($req, $resp, $args);
     });
 
-$app->post('/compte/inscription[/]',
+$app->post('/inscription[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->creerCompte($req, $resp, $args);
     });
+
+$app->get('/connexion[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->seConnecter($req, $resp, $args);
+    });
+
+$app->post('/connexion[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->seConnecter($req, $resp, $args);
+    });
+
+
+//////////////////////////////////////////
+////          RESERVATION             ////
+//////////////////////////////////////////
 
 $app->get('/reservation/item/{id}[/]',
     function($req, $resp, $args) {
@@ -121,7 +154,17 @@ $app->post("/reservation/item/{id}[/]",
         return $controleur->reserverItem($req, $resp, $args);
     });
 
+$app->get('/creation/modifier/{token}/{item}[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierItem($req, $resp, $args);
+    });
 
+$app->post('/creation/modifier/{token}/{item}[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierItem($req, $resp, $args);
+    });
 
 
 $app->run();

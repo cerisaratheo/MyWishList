@@ -36,6 +36,11 @@ class VueCreateur
             case 6 :
                 $contenu = $this->modifierListe();
                 break;
+            case 7 :
+                $contenu = $this->afficherFromulaireConnexion();
+                break;
+            case 8 :
+                $contenu = $this->afficherFormulaireModifierItem();
 
         }
         $html = <<<END
@@ -99,9 +104,10 @@ END;
 
     private function afficherListe() : string {
         $titre = $this->elem['liste']->titre;
+        $token = $this->elem['liste']->token_modif;
         $items = '';
         foreach ($this->elem['items'] as $item)
-            $items = $items . '<p>'.$item->id.' - '.$item->nom.'</p>';
+            $items = $items . '<p><a href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
 <div class="liste">
     <h1>$titre</h1>
@@ -171,5 +177,50 @@ END;
 END;
         return $html;
     }
+
+    private function afficherFromulaireConnexion() : string {
+
+        $erreur = "";
+        if ($this->elem == false)
+            $erreur = "<h3>Mot de passe ou nom d'utilisateur incorrect(s)</h3>";
+
+        $html = <<<END
+<h2>Connexion</h2>
+$erreur
+<form  action="" method="post">
+    <div class="formLigne">
+        <label for="">Username:</label>
+        <input type="text" name="username" required>
+    </div>
+    <div class="formLigne">
+        <label for="desc">Password :</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class="formLigne">
+        <input type="submit" value="Valider">
+    </div>
+</form>
+END;
+        return $html;
+    }
+
+    private function afficherFormulaireModifierItem() : string {
+        $idItem = $this->elem['id'];
+        $nom = $this->elem['nom'];
+        $desc = $this->elem['desc'];
+        $prix = $this->elem['prix'];
+        $lien = $this->elem['lien'];
+
+        $html = <<<END
+<form action="$idItem" method="POST">
+    <input type="text" name="nomItem" placeholder="$nom"><br>
+    <input type="text" name="descItem" placeholder="$desc"><br>
+    <input type="number" name="prixItem" placeholder="$prix" min="0" step="0.01"><br>
+    <input type="url" name="lienItem" placeholder="$lien"><br>
+    <button type="submmit" name="validerAjoutItem">valider</button>
+</form>
+END;
+        return $html;
+  }
 
 }
