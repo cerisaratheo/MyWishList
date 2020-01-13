@@ -206,10 +206,10 @@ END;
 
     private function afficherFormulaireModifierItem() : string {
         $idItem = $this->elem['id'];
-        $nom = $this->elem['nom'];
-        $desc = $this->elem['desc'];
-        $prix = $this->elem['prix'];
-        $lien = $this->elem['lien'];
+        $nom = "Nom : " . $this->elem['nom'];
+        $desc = "Desc : " . $this->elem['desc'];
+        $prix = "Prix : " . $this->elem['prix'];
+        $lien = "Lien : " . $this->elem['lien'];
 
         $html = <<<END
 <form action="$idItem" method="POST">

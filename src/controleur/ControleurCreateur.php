@@ -217,19 +217,18 @@ class ControleurCreateur
          $item = Item::where('id', '=', $idItem)
              ->firstOrFail();
 
-
             // WOW FILTRE / ! \
         $nom = $rq->getParsedBody()['nomItem'];
         $desc = $rq->getParsedBody()['descItem'];
         $prix = $rq->getParsedBody()['prixItem'];
         $url = $rq->getParsedBody()['lienItem'];
-        if(!($nom === ""))
+        if(!($nom == ""))
             $item->nom = $nom;
-        if(!($desc === ""))
+        if(!($desc == ""))
             $item->descr = $desc;
-        if(!($url === ""))
+        if(!($url == ""))
             $item->url = $url;
-        if(!($prix === ""))
+        if(!($prix == ""))
             $item->tarif = $prix;
         $item->save();
 
@@ -240,7 +239,6 @@ class ControleurCreateur
             'prix' => $item->tarif,
             'lien' => $item->url
         );
-
 
             $vue = new VueCreateur($info);
             $html = $vue->render(8);
