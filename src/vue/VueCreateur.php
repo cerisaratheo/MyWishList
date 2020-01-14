@@ -45,6 +45,11 @@ class VueCreateur
         }
         $html = <<<END
 <!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../css/style.css">
+		<title>MyWisList</title>
+	</head>
 <body>
     $contenu
 </body>
