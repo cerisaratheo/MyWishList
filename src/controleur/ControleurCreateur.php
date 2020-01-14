@@ -174,7 +174,7 @@ class ControleurCreateur
             // On sanitize
             filter_var($nom, FILTER_SANITIZE_STRING);
             filter_var($desc, FILTER_SANITIZE_STRING);
-            filter_var($prix, FILTER_SANITIZE_FLOAT);
+            filter_var($prix, FILTER_SANITIZE_NUMBER_FLOAT);
             filter_var($url, FILTER_SANITIZE_URL);
 
             $item = new Item();
@@ -260,7 +260,7 @@ class ControleurCreateur
         // On sanitize
         filter_var($nom, FILTER_SANITIZE_STRING);
         filter_var($desc, FILTER_SANITIZE_STRING);
-        filter_var($prix, FILTER_SANITIZE_FLOAT);
+        filter_var($prix, FILTER_SANITIZE_NUMBER_FLOAT);
         filter_var($url, FILTER_SANITIZE_URL);
 
         if(!($nom == ""))

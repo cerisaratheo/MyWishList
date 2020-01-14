@@ -54,6 +54,18 @@ class VueCreateur
 		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
+		<header>
+	 <div id="rubrique">
+	 <p id="titreR">MyWishList</p>
+	 <nav>
+	 <ul>
+		 <li><a href="index.html">Mes Listes</a></li>
+		 <li><a href="ListeSerie.html">Se connecter</a></li>
+		 <li><a href="A_Propos.html">S'inscrire</a></li>
+	 </ul>
+	 </nav>
+	 </div>
+ </header>
 <body>
     $contenu
 </body>
@@ -151,7 +163,7 @@ END;
     private function afficherFormulaireAjoutItem() : string {
         $html = <<<END
 <form action="ajouterItem" method="POST">
-    <h2>Ajouer un Item</h2>
+    <h2>Ajouter un Item</h2>
     <div class="formulaire">
         <input style="text-align:center" type="text" name="nomItem" placeholder="Nom" required><br>
     </div>
@@ -165,7 +177,7 @@ END;
         <input style="text-align:center" type="url" name="lienItem" placeholder="Lien"><br>
     </div>
     <div class="formulaire">
-        <input type="submmit" value="valider">
+        <input type="submit" value="valider">
     </div>
 </form>
 END;
@@ -201,11 +213,9 @@ $erreur
 <form  action="" method="post">
     <h2>Connexion</h2>
     <div class="formulaire">
-        <label for="">Username:</label>
         <input style="text-align:center" type="text" name="username" placeholder="Pseudonyme" required>
     </div>
     <div class="formulaire">
-        <label for="desc">Password :</label>
         <input style="text-align:center" type="password" name="password" placeholder="Mot de passe" required>
     </div>
     <div class="formulaire">
@@ -232,14 +242,14 @@ END;
     <div class="formulaire">
         <input style="text-align:center" type="text" name="descItem" placeholder="$desc"><br>
     </div>
-    <div calss="formulaire">
+    <div class="formulaire">
         <input style="text-align:center" type="number" name="prixItem" placeholder="$prix" min="0" step="0.01"><br>
     </div>
     <div class="formulaire">
         <input style="text-align:center" type="url" name="lienItem" placeholder="$lien"><br>
     </div>
     <div class="formulaire">
-        <input type="submmit" value="valider">
+        <input type="submit" value="valider">
     </div>
 </form>
 END;
