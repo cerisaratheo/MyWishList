@@ -7,10 +7,12 @@ namespace mywishlist\vue;
 class VueCreateur
 {
     private $elem;
+    private $path;
 
-    function __construct($tab)
+    function __construct($tab, $path)
     {
         $this->elem = $tab;
+        $this->path = $path;
     }
 
     public function render(int $index) : string {
@@ -43,14 +45,17 @@ class VueCreateur
                 $contenu = $this->afficherFormulaireModifierItem();
 
         }
+
+        $path =  $this->path;
         $html = <<<END
 <!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
 <body>
+    $path
     $contenu
 </body>
 <html>
@@ -83,7 +88,7 @@ END;
     }
 
     private function modifierListe() : string {
-        $token = $this->elem;
+       $token = $this->elem;
         $html = <<<END
 <h2>Modification d'une liste de souhaits</h2>
 <form  action="$token" method="post">

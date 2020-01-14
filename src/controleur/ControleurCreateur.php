@@ -13,8 +13,10 @@ class ControleurCreateur
 {
 
     public function creerListe($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
         if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("", $path);
             $html = $vue->render(0);
         }
         else {
@@ -40,7 +42,7 @@ class ControleurCreateur
             $liste->token_participation = $tokenParticipation;
             $liste->save();
 
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("", $path);
             $html = $vue->render(0);
             }
 
@@ -49,6 +51,8 @@ class ControleurCreateur
     }
 
     public function accederItem($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
         $token = $args['token'];
             $liste = Liste::select("*")
             -> where('token_modif',"=",$token)
@@ -59,7 +63,7 @@ class ControleurCreateur
                 -> where ('liste_id','=',$liste->no)
                 -> where ('id','=',$id)
                 -> first();
-            $vue = new VueCreateur($item);
+            $vue = new VueCreateur($item, $path);
             $html = $vue->render(4);
             $rs->getBody()->write($html);
         }
@@ -89,6 +93,8 @@ class ControleurCreateur
     }
 
     public function accederListe($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
         $token = $args['token'];
         $liste = Liste::select("*")
             -> where('token_modif','=',$token)
@@ -104,7 +110,7 @@ class ControleurCreateur
               'liste' => $liste,
               'items' => $items
             );
-            $vue = new VueCreateur($infos);
+            $vue = new VueCreateur($infos, $path);
             $html = $vue->render(2);
             $rs->getBody()->write($html);
         }
@@ -115,11 +121,13 @@ class ControleurCreateur
     }
 
     public function modifierListe($rq,$rs,$args){
-        $vue = new VueCreateur("");
+        $path = $rq->getURI()->getBasePath();
+
+        $vue = new VueCreateur("", $path);
         $html = $vue->render(6);
         if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
             $token = $args['token'];
-            $vue = new VueCreateur($token);
+            $vue = new VueCreateur($token, $path);
             $html = $vue->render(6);
         }
         else{
@@ -135,7 +143,7 @@ class ControleurCreateur
                 $liste->description = $rq->getParsedBody()['desc'];
                 $liste->expiration = $rq->getParsedBody()['expiration'];
                 $liste->save();
-                $vue = new VueCreateur("");
+                $vue = new VueCreateur("", $path);
                 $html = $vue->render(6);
             }
 
@@ -146,8 +154,10 @@ class ControleurCreateur
 
     public function ajoutItem($rq, $rs, $args)
     {
+        $path = $rq->getURI()->getBasePath();
+
         if (!isset($rq->getParsedBody()['nomItem']) || !isset($rq->getParsedBody()['descItem']) || !isset($rq->getParsedBody()['prixItem'])) {
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("", $path);
             $html = $vue->render(3);
         } else {
             $token = $args['token'];
@@ -175,7 +185,7 @@ class ControleurCreateur
             $item->tarif = $prix;
             $item->save();
 
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("", $path);
             $html = $vue->render(3);
         }
         $rs->getBody()->write($html);
@@ -183,8 +193,10 @@ class ControleurCreateur
     }
 
     public function creerCompte($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
         if (! isset($rq->getParsedBody()['username'])){
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("", $path);
             $html = $vue->render(5);
         }
         else {
@@ -198,7 +210,7 @@ class ControleurCreateur
 
             Authentification::createUser($pseudo, $mdp);
 
-            $vue = new VueCreateur("");
+            $vue = new VueCreateur("",$path);
             $html = $vue->render(5);
         }
 
@@ -207,8 +219,10 @@ class ControleurCreateur
     }
 
     public function seConnecter($rq, $rs, $args) {
+        $path = $rq->getURI()->getBasePath();
+
         if (! isset($rq->getParsedBody()['username'])){
-            $vue = new VueCreateur(true);
+            $vue = new VueCreateur(true, $path);
             $html = $vue->render(7);
         }
         else {
@@ -222,7 +236,7 @@ class ControleurCreateur
 
             $etat = Authentification::authenticate($pseudo, $mdp);
 
-            $vue = new VueCreateur($etat);
+            $vue = new VueCreateur($etat, $path);
             $html = $vue->render(7);
         }
         $rs->getBody()->write($html);
@@ -231,6 +245,8 @@ class ControleurCreateur
 
     public function modifierItem($rq, $rs, $args)
     {
+        $path = $rq->getURI()->getBasePath();
+
         $idItem = $args['item'];
          $item = Item::where('id', '=', $idItem)
              ->firstOrFail();
@@ -265,7 +281,7 @@ class ControleurCreateur
             'lien' => $item->url
         );
 
-            $vue = new VueCreateur($info);
+            $vue = new VueCreateur($info,$path);
             $html = $vue->render(8);
         $rs->getBody()->write($html);
         return $rs;

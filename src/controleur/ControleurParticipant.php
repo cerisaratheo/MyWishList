@@ -10,10 +10,12 @@ class ControleurParticipant
 {
 
     public function getItem($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
         $id = $args['id'];
 
         $item = \mywishlist\models\Item::find($id);
-        $vue = new \mywishlist\vue\VueParticipant( [$item] );
+        $vue = new \mywishlist\vue\VueParticipant( [$item],$path );
         $html = $vue->render( 3 );
 
         $rs->getBody()->write($html);
@@ -21,9 +23,10 @@ class ControleurParticipant
     }
 
     public function getListeSouhaits($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
 
         $list = \mywishlist\models\Liste::all();
-        $vue = new \mywishlist\vue\VueParticipant( $list->toArray() );
+        $vue = new \mywishlist\vue\VueParticipant( $list->toArray(), $path );
         $html = $vue->render( 1 );
 
         $rs->getBody()->write($html);
@@ -32,10 +35,12 @@ class ControleurParticipant
 
     public function afficherFormulaireReservation($rq, $rs, $args)
     {
+        $path = $rq->getURI()->getBasePath();
+
         $id = $args['id'];
         $item = \mywishlist\models\Item::find($id);
         $ir = \mywishlist\models\Reservation::find($id);
-        $vue = new \mywishlist\vue\VueParticipant("");
+        $vue = new \mywishlist\vue\VueParticipant("", $path);
         if (isset($ir)) {
             echo "L'item est déjà réservé.";
         }
@@ -47,9 +52,11 @@ class ControleurParticipant
     }
     public function reserverItem($rq, $rs, $args)
     {
+        $path = $rq->getURI()->getBasePath();
+
         $id = $args['id'];
         $item = \mywishlist\models\Item::find($id);
-        $vue = new \mywishlist\vue\VueParticipant("");
+        $vue = new \mywishlist\vue\VueParticipant("", $path);
         $html = $vue->render(4);
         $rs->getBody()->write($html);
         if (isset($_COOKIE['pseudo']))
