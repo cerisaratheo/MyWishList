@@ -84,8 +84,9 @@ END;
     <div class="formulaire">
         <input style="text-align:center" type="text" name="desc" placeholder="Description" required>
     </div>
+    <p>Date d'expiration :</p>
     <div class="formulaire">
-        <input style="text-align:center" type="date" name="expiration" placeholder="Date d'expiration" required>
+        <input style="text-align:center" type="date" name="expiration" required>
     </div>
     <div class="formulaire">
         <input type="submit" value="Creer">
@@ -106,8 +107,9 @@ END;
     <div class="formulaire">
         <input style="text-align:center" type="text" name="desc" placeholder="Description" required>
     </div>
+    <p>Date d'expiration :</p>
     <div class="formulaire">
-        <input style="text-align:center" type="date" name="expiration" placeholder="Date d'expiration" required>
+        <input style="text-align:center" type="date" name="expiration" required>
     </div>
     <div class="formulaire">
         <input type="submit" value="Modifier">

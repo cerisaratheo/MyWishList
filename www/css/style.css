@@ -50,6 +50,11 @@ h2 {
     justify-content : center;
 }
 
+p{
+    margin-bottom: 0;
+    margin-left : 4em;
+}
+
 label{
     padding-right: 10px;
     margin-top: 0.7em;
@@ -89,10 +94,6 @@ input[type="date"]:before {
     width:4em;
 }
 
-input[type="date"]:focus:before,
-input[type="date"]:valid:before {
-    content: "";
-}
 
 
 input[type="submit"] {
