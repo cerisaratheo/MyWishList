@@ -60,21 +60,18 @@ END;
 
     private function creerListe() : string {
         $html = <<<END
-<h2>Création d'une liste de souhaits</h2>
 <form  action="creerListe" method="post">
-    <div class="formLise">
-        <label for="titre">Titre :</label>
-        <input type="text" name="titre" required>
+<h2>Création d'une liste de souhaits</h2>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="titre" placeholder="Titre" required>
     </div>
-    <div class="formLise">
-        <label for="desc">Description :</label>
-        <input type="text" name="desc" required>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="desc" placeholder="Description" required>
     </div>
-    <div class="formLise">
-        <label for="expiration">Date d'expiration :</label>
-        <input type="date" name="expiration" required>
+    <div class="formulaire">
+        <input style="text-align:center" type="date" name="expiration" placeholder="Date d'expiration" required>
     </div>
-    <div class="formLise">
+    <div class="formulaire">
         <input type="submit" value="Creer">
     </div>
 </form>
@@ -85,21 +82,18 @@ END;
     private function modifierListe() : string {
         $token = $this->elem;
         $html = <<<END
-<h2>Modification d'une liste de souhaits</h2>
 <form  action="$token" method="post">
-    <div class="formLise">
-        <label for="titre">Titre :</label>
-        <input type="text" name="titre" required>
+<h2>Modification d'une liste de souhaits</h2>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="titre" placeholder="Titre" required>
     </div>
-    <div class="formLise">
-        <label for="desc">Description :</label>
-        <input type="text" name="desc" required>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="desc" placeholder="Description" required>
     </div>
-    <div class="formLise">
-        <label for="expiration">Date d'expiration :</label>
-        <input type="date" name="expiration" required>
+    <div class="formulaire">
+        <input style="text-align:center" type="date" name="expiration" placeholder="Date d'expiration" required>
     </div>
-    <div class="formLise">
+    <div class="formulaire">
         <input type="submit" value="Modifier">
     </div>
 </form>
@@ -153,11 +147,22 @@ END;
     private function afficherFormulaireAjoutItem() : string {
         $html = <<<END
 <form action="ajouterItem" method="POST">
-    <input type="text" name="nomItem" placeholder="nom" required><br>
-    <input type="text" name="descItem" placeholder="description" required><br>
-    <input type="number" name="prixItem" placeholder="prix" min="0" step="0.01" required><br>
-    <input type="url" name="lienItem" placeholder="lien"><br>
-    <button type="submmit" name="validerAjoutItem">valider</button>
+    <h2>Ajouer un Item</h2>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="nomItem" placeholder="Nom" required><br>
+    </div>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="descItem" placeholder="Description" required><br>
+    </div>
+    <div class="formulaire">
+        <input style="text-align:center" type="number" name="prixItem" placeholder="Prix" min="0" step="0.01" required><br>
+    </div>
+    <div class="formulaire">
+        <input style="text-align:center" type="url" name="lienItem" placeholder="Lien"><br>
+    </div>
+    <div class="formulaire">
+        <input type="submmit" value="valider">
+    </div>
 </form>
 END;
         return $html;
@@ -165,17 +170,15 @@ END;
 
     private function afficherFromulaireInscription() : string {
         $html = <<<END
-<h2>Inscription</h2>
 <form  action="" method="post">
-    <div class="formLigne">
-        <label for="">Username:</label>
-        <input type="text" name="username" required>
+    <h2>Inscription</h2>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="username" placeholder="Pseudonyme" required>
     </div>
-    <div class="formLigne">
-        <label for="desc">Password :</label>
-        <input type="password" name="password" required>
+    <div class="formulaire">
+        <input style="text-align:center" type="password" name="password" placeholder="Mot de passe" required>
     </div>
-    <div class="formLigne">
+    <div class="formulaire">
         <input type="submit" value="Valider">
     </div>
 </form>
@@ -190,18 +193,18 @@ END;
             $erreur = "<h3>Mot de passe ou nom d'utilisateur incorrect(s)</h3>";
 
         $html = <<<END
-<h2>Connexion</h2>
 $erreur
 <form  action="" method="post">
-    <div class="formLigne">
+    <h2>Connexion</h2>
+    <div class="formulaire">
         <label for="">Username:</label>
-        <input type="text" name="username" required>
+        <input style="text-align:center" type="text" name="username" placeholder="Pseudonyme" required>
     </div>
-    <div class="formLigne">
+    <div class="formulaire">
         <label for="desc">Password :</label>
-        <input type="password" name="password" required>
+        <input style="text-align:center" type="password" name="password" placeholder="Mot de passe" required>
     </div>
-    <div class="formLigne">
+    <div class="formulaire">
         <input type="submit" value="Valider">
     </div>
 </form>
@@ -218,11 +221,22 @@ END;
 
         $html = <<<END
 <form action="$idItem" method="POST">
-    <input type="text" name="nomItem" placeholder="$nom"><br>
-    <input type="text" name="descItem" placeholder="$desc"><br>
-    <input type="number" name="prixItem" placeholder="$prix" min="0" step="0.01"><br>
-    <input type="url" name="lienItem" placeholder="$lien"><br>
-    <button type="submmit" name="validerAjoutItem">valider</button>
+    <h2>Modifier un Item</h2>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="nomItem" placeholder="$nom"><br>
+    </div>
+    <div class="formulaire">
+        <input style="text-align:center" type="text" name="descItem" placeholder="$desc"><br>
+    </div>
+    <div calss="formulaire">
+        <input style="text-align:center" type="number" name="prixItem" placeholder="$prix" min="0" step="0.01"><br>
+    </div>
+    <div class="formulaire">
+        <input style="text-align:center" type="url" name="lienItem" placeholder="$lien"><br>
+    </div>
+    <div class="formulaire">
+        <input type="submmit" value="valider">
+    </div>
 </form>
 END;
         return $html;
