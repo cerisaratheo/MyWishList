@@ -109,6 +109,18 @@ $app->get('/creation/liste/{token}/{item}[/]',
         return $controleur->accederItem($req, $resp, $args);
     });
 
+$app->get('/creation/modifier/{token}/{item}[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierItem($req, $resp, $args);
+    });
+
+$app->post('/creation/modifier/{token}/{item}[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCreateur($this);
+        return $controleur->modifierItem($req, $resp, $args);
+    });
+
 //////////////////////////////////////////
 ////              COMPTES             ////
 //////////////////////////////////////////
@@ -154,17 +166,7 @@ $app->post("/reservation/item/{id}[/]",
         return $controleur->reserverItem($req, $resp, $args);
     });
 
-$app->get('/creation/modifier/{token}/{item}[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
-        return $controleur->modifierItem($req, $resp, $args);
-    });
 
-$app->post('/creation/modifier/{token}/{item}[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
-        return $controleur->modifierItem($req, $resp, $args);
-    });
 
 
 $app->run();
