@@ -23,6 +23,10 @@ class ControleurCreateur
             $desc = $rq->getParsedBody()['desc'];
             $date = $rq->getParsedBody()['expiration'];
 
+            // On sanitize et pas besoin de filtrer la date car on ne peut mettre que des chiffres (ou pick une date)
+            filter_var($titre, FILTER_SANITIZE_STRING);
+            filter_var($desc, FILTER_SANITIZE_STRING);
+
             // Generation du token de modification
             $tokenModif = $this->genererToken(1);
             $tokenParticipation = $this->genererToken(2);
@@ -38,7 +42,7 @@ class ControleurCreateur
 
             $vue = new VueCreateur("");
             $html = $vue->render(0);
-        }
+            }
 
         $rs->getBody()->write($html);
         return $rs;
@@ -157,6 +161,12 @@ class ControleurCreateur
             $prix = $rq->getParsedBody()['prixItem'];
             $url = $rq->getParsedBody()['lienItem'];
 
+            // On sanitize
+            filter_var($nom, FILTER_SANITIZE_STRING);
+            filter_var($desc, FILTER_SANITIZE_STRING);
+            filter_var($prix, FILTER_SANITIZE_FLOAT);
+            filter_var($url, FILTER_SANITIZE_URL);
+
             $item = new Item();
             $item->liste_id = $numero->no;
             $item->nom = $nom;
@@ -182,6 +192,10 @@ class ControleurCreateur
             $pseudo = $rq->getParsedBody()['username'];
             $mdp = $rq->getParsedBody()['password'];
 
+            // On sanitize
+            filter_var($pseudo, FILTER_SANITIZE_STRING);
+            filter_var($mdp, FILTER_SANITIZE_STRING);
+
             Authentification::createUser($pseudo, $mdp);
 
             $vue = new VueCreateur("");
@@ -201,6 +215,10 @@ class ControleurCreateur
             // A filter !
             $pseudo = $rq->getParsedBody()['username'];
             $mdp = $rq->getParsedBody()['password'];
+
+            // On sanitize
+            filter_var($pseudo, FILTER_SANITIZE_STRING);
+            filter_var($mdp, FILTER_SANITIZE_STRING);
 
             $etat = Authentification::authenticate($pseudo, $mdp);
 
@@ -222,6 +240,13 @@ class ControleurCreateur
         $desc = $rq->getParsedBody()['descItem'];
         $prix = $rq->getParsedBody()['prixItem'];
         $url = $rq->getParsedBody()['lienItem'];
+
+        // On sanitize
+        filter_var($nom, FILTER_SANITIZE_STRING);
+        filter_var($desc, FILTER_SANITIZE_STRING);
+        filter_var($prix, FILTER_SANITIZE_FLOAT);
+        filter_var($url, FILTER_SANITIZE_URL);
+
         if(!($nom == ""))
             $item->nom = $nom;
         if(!($desc == ""))
