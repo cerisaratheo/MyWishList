@@ -6,10 +6,12 @@ class VueParticipant
 {
 
     private $elem;
+    private $path;
 
-    function __construct($tab)
+    function __construct($tab, $path)
     {
         $this->elem = $tab;
+        $this->path = $path;
     }
 
     public function render(int $index) : string {
@@ -27,10 +29,17 @@ class VueParticipant
                 $contenu = $this->afficherFormulaireReservation();
                 break;
         }
+
+        $path =  $this->path;
         $html = <<<END
-<!DOCTYPE html> 
-<body>  
-$contenu
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="$path/css/style.css">
+		<title>MyWisList</title>
+	</head>
+<body>
+    $contenu
 </body>
 <html>
 END;
