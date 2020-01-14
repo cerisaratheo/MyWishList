@@ -55,7 +55,6 @@ class VueCreateur
 		<title>MyWisList</title>
 	</head>
 <body>
-    $path
     $contenu
 </body>
 <html>

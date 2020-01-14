@@ -39,7 +39,6 @@ class VueParticipant
 		<title>MyWisList</title>
 	</head>
 <body>
-    $path
     $contenu
 </body>
 <html>
