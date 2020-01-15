@@ -128,7 +128,7 @@ END;
 
     private function afficherListesSouhaits() : string {
         $res = "";
-        foreach ($this as $liste){
+        foreach ($this->elem as $liste){
             if(isset($liste['token_modif'])&&isset($liste['titre'])){
                 $token = $liste['token_modif'];
                 $res = $res . "<p><a href=\"".$this->path."/creation/liste/".$token."\">".$liste['titre'].'</a></p>';
