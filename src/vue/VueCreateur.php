@@ -116,7 +116,7 @@ END;
         $token = $this->elem['liste']->token_modif;
         $items = '';
         foreach ($this->elem['items'] as $item)
-            $items = $items . '<p><a href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
+            $items = $items . '<p><a class="lienItem" href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
 <div class="liste">
     <h1>$titre</h1>
@@ -131,7 +131,7 @@ END;
         foreach ($this->elem as $liste){
             if(isset($liste['token_modif'])&&isset($liste['titre'])){
                 $token = $liste['token_modif'];
-                $res = $res . "<p><a href=\"".$this->path."/creation/liste/".$token."\">".$liste['titre'].'</a></p>';
+                $res = $res . "<div class='liste'><p><a  class='lienListe' href=\"".$this->path."/creation/liste/".$token."\">".$liste['titre'].'</a></p></div>';
             }
 
         }

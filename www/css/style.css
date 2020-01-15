@@ -6,6 +6,42 @@ html, body{
     background-size: cover;
 }
 
+.accueil {
+    display: flex;
+    justify-content: center;
+    font-size: 5em;
+    margin-top: 3em;
+}
+
+
+.liste {
+    display:flex;
+    justify-content: center;
+    padding : 50px;
+}
+
+.lienListe {
+    text-decoration: none;
+    color: white;
+    font-size:2em;
+}
+
+a:hover {
+    color: lightgrey;
+}
+
+.lienItem {
+    text-decoration: none;
+    color: white;
+    font-size:1.1em;
+}
+
+body {
+    color: white;
+}
+
+
+
 header {
     background: #d63031;
     display : inline-block;
@@ -55,6 +91,7 @@ nav a:hover::before {
 
 
 h2 {
+    color:black;
     display : flex;
     justify-content : center;
 }
