@@ -53,7 +53,7 @@ class VueCreateur
 <!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="$path/css/style.css">
+		<link rel="stylesheet" href="$path/../css/style.css">
 		<title>MyWisList</title>
 	</head>
 <body>
