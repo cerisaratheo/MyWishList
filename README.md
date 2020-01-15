@@ -114,6 +114,8 @@ Fonctionnalités non réalisées :
 
 Installation sur une machine quelconque :
 
- . Il faut avoir un serveur web (type apache) et MySql sur sa machine pour que le tout fonctionne correctement
- . Executer le script base_mywishlist pour avoir une base de donnée utilisable
- . Executer la commande "composer install" dans le dossier src
+Il faut avoir un serveur web (type apache) et MySql sur sa machine pour que le tout fonctionne correctement.
+
+Executer le script base_mywishlist pour avoir une base de donnée utilisable.
+
+Executer la commande "composer install" dans le dossier src.
