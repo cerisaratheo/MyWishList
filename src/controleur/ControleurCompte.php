@@ -7,9 +7,20 @@ namespace mywishlist\controleur;
 use mywishlist\models\Utilisateur;
 use mywishlist\vue\VueCompte;
 
+/**
+ * Class ControleurCompte
+ * @package mywishlist\controleur
+ */
 class ControleurCompte
 {
 
+    /**
+     * Methode qui permet d'acceder à l'accueil
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function afficherAccueil($rq, $rs, $args) {
         $path = $rq->getURI()->getBasePath();
         $vue = new VueCompte("", $path);
@@ -21,7 +32,13 @@ class ControleurCompte
 
 
 
-
+    /**
+     * Methode qui permet de creer un compte createur
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function creerCompte($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
@@ -54,6 +71,13 @@ class ControleurCompte
         return $rs;
     }
 
+    /**
+     * Methode qui permet de se connecter
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function seConnecter($rq, $rs, $args) {
         $path = $rq->getURI()->getBasePath();
 
@@ -83,6 +107,13 @@ class ControleurCompte
         return $rs;
     }
 
+    /**
+     * Methode qui permet de se deconnecter
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function seDeconnecter($rq, $rs, $args) {
         $path = $rq->getURI()->getBasePath();
 
