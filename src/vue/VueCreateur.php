@@ -33,17 +33,17 @@ class VueCreateur
                 $contenu = $this->afficherItem();
                 break;
             case 5 :
-                $contenu = $this->afficherFromulaireInscription();
+                // place libre
                 break;
             case 6 :
                 $contenu = $this->modifierListe();
                 break;
             case 7 :
-                $contenu = $this->afficherFromulaireConnexion();
+                // place libre
                 break;
             case 8 :
                 $contenu = $this->afficherFormulaireModifierItem();
-
+                break;
         }
 
         $path =  $this->path;
@@ -180,48 +180,6 @@ END;
     </div>
     <div class="formulaire">
         <input type="submit" value="valider">
-    </div>
-</form>
-END;
-        return $html;
-    }
-
-    private function afficherFromulaireInscription() : string {
-        $html = <<<END
-<form  action="" method="post">
-    <h2>Inscription</h2>
-    <div class="formulaire">
-        <input style="text-align:center" type="text" name="username" placeholder="Pseudonyme" required>
-    </div>
-    <div class="formulaire">
-        <input style="text-align:center" type="password" name="password" placeholder="Mot de passe" required>
-    </div>
-    <div class="formulaire">
-        <input type="submit" value="Valider">
-    </div>
-</form>
-END;
-        return $html;
-    }
-
-    private function afficherFromulaireConnexion() : string {
-
-        $erreur = "";
-        if ($this->elem == false)
-            $erreur = "<h3>Mot de passe ou nom d'utilisateur incorrect(s)</h3>";
-
-        $html = <<<END
-$erreur
-<form  action="" method="post">
-    <h2>Connexion</h2>
-    <div class="formulaire">
-        <input style="text-align:center" type="text" name="username" placeholder="Pseudonyme" required>
-    </div>
-    <div class="formulaire">
-        <input style="text-align:center" type="password" name="password" placeholder="Mot de passe" required>
-    </div>
-    <div class="formulaire">
-        <input type="submit" value="Valider">
     </div>
 </form>
 END;

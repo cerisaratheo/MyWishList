@@ -4,6 +4,7 @@
 namespace mywishlist\controleur;
 
 
+use mywishlist\models\Role;
 use mywishlist\models\Utilisateur;
 
 class Authentification
@@ -17,7 +18,7 @@ class Authentification
         $newUser = new Utilisateur();
         $newUser->username = $userName;
         $newUser->password = $hash;
-        $newUser->role = 100;
+        $newUser->role = 1;
         $newUser->save();
     }
 
@@ -35,14 +36,15 @@ class Authentification
     }
 
     private static function loadProfile($user){
-        $role = Utilisateur::role()
+        $role = /*Utilisateur::role()
             ->where('uid','=',$user->id)
-            ->first();
+            ->first();*/
+        $role = Role::users()->get();
         $_SESSION['profile'] = array(
             'username'   => $user->username,
             'role_id'    => $user->role,
-            'client_ip'  => $_SERVER['REMOTE_ADDR'],
-            'level' => $role->auth_level
+            'client_ip'  => $_SERVER['REMOTE_ADDR']
+            //'level' => $role->auth_level
             );
     }
 

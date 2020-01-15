@@ -11,6 +11,6 @@ class Role extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     public function users(){
-        return $this->hasMany('mywishlist\models\Utilisateur','role');
+        return $this->hasMany('\mywishlist\models\Utilisateur','role');
 }
 }

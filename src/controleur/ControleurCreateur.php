@@ -192,57 +192,6 @@ class ControleurCreateur
         return $rs;
     }
 
-    public function creerCompte($rq, $rs, $args){
-        $path = $rq->getURI()->getBasePath();
-
-        if (! isset($rq->getParsedBody()['username'])){
-            $vue = new VueCreateur("", $path);
-            $html = $vue->render(5);
-        }
-        else {
-            // A filter !
-            $pseudo = $rq->getParsedBody()['username'];
-            $mdp = $rq->getParsedBody()['password'];
-
-            // On sanitize
-            filter_var($pseudo, FILTER_SANITIZE_STRING);
-            filter_var($mdp, FILTER_SANITIZE_STRING);
-
-            Authentification::createUser($pseudo, $mdp);
-
-            $vue = new VueCreateur("",$path);
-            $html = $vue->render(5);
-        }
-
-        $rs->getBody()->write($html);
-        return $rs;
-    }
-
-    public function seConnecter($rq, $rs, $args) {
-        $path = $rq->getURI()->getBasePath();
-
-        if (! isset($rq->getParsedBody()['username'])){
-            $vue = new VueCreateur(true, $path);
-            $html = $vue->render(7);
-        }
-        else {
-            // A filter !
-            $pseudo = $rq->getParsedBody()['username'];
-            $mdp = $rq->getParsedBody()['password'];
-
-            // On sanitize
-            filter_var($pseudo, FILTER_SANITIZE_STRING);
-            filter_var($mdp, FILTER_SANITIZE_STRING);
-
-            $etat = Authentification::authenticate($pseudo, $mdp);
-
-            $vue = new VueCreateur($etat, $path);
-            $html = $vue->render(7);
-        }
-        $rs->getBody()->write($html);
-        return $rs;
-    }
-
     public function modifierItem($rq, $rs, $args)
     {
         $path = $rq->getURI()->getBasePath();

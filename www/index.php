@@ -4,6 +4,7 @@ namespace mywishlist;
 
 require '../src/vendor/autoload.php';
 
+use mywishlist\controleur\ControleurCompte;
 use mywishlist\controleur\ControleurCreateur;
 use mywishlist\controleur\ControleurParticipant;
 use mywishlist\models\Liste;
@@ -53,6 +54,18 @@ $app->get('/testVue/item/{id}[/]',
 
 
 //////////////////////////////////////////
+////       ACCUEIL ET COMPTES         ////
+//////////////////////////////////////////
+
+$app->get('/accueil[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurCreateur($this);
+        return $controleur->creerListe($req, $resp, $args);
+    });
+
+
+
+//////////////////////////////////////////
 ////          CREATION                ////
 //////////////////////////////////////////
 
@@ -67,6 +80,18 @@ $app->post('/creation/creerListe[/]',
         $controleur = new ControleurCreateur($this);
         return $controleur->creerListe($req, $resp, $args);
     });
+
+
+
+
+$app->get('/creation/listes[/]',
+    function(Request$req, Response$resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->getListeSouhaits($req, $resp, $args);
+    });
+
+
+
 
 $app->get('/creation/modifierListe/{token}[/]',
     function($req, $resp, $args) {
@@ -86,10 +111,6 @@ $app->get('/creation/liste/{token}[/]',
         return $controleur->accederListe($req, $resp, $args);
     });
 
-$app->get('/participation/{token}[/]',
-    function($req, $resp, $args) {
-        return $resp;
-    });
 
 $app->get('/creation/{token}/ajouterItem[/]',
     function($req, $resp, $args){
@@ -127,25 +148,25 @@ $app->post('/creation/modifier/{token}/{item}[/]',
 
 $app->get('/inscription[/]',
     function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
+        $controleur = new ControleurCompte($this);
         return $controleur->creerCompte($req, $resp, $args);
     });
 
 $app->post('/inscription[/]',
     function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
+        $controleur = new ControleurCompte($this);
         return $controleur->creerCompte($req, $resp, $args);
     });
 
 $app->get('/connexion[/]',
     function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
+        $controleur = new ControleurCompte($this);
         return $controleur->seConnecter($req, $resp, $args);
     });
 
 $app->post('/connexion[/]',
     function($req, $resp, $args){
-        $controleur = new ControleurCreateur($this);
+        $controleur = new ControleurCompte($this);
         return $controleur->seConnecter($req, $resp, $args);
     });
 
@@ -153,6 +174,11 @@ $app->post('/connexion[/]',
 //////////////////////////////////////////
 ////          RESERVATION             ////
 //////////////////////////////////////////
+
+$app->get('/participation/{token}[/]',
+    function($req, $resp, $args) {
+        return $resp;
+    });
 
 $app->get('/reservation/item/{id}[/]',
     function($req, $resp, $args) {
