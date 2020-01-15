@@ -58,7 +58,7 @@ class VueCreateur
 	</head>
 <body>
 	$header
-    
+
     $contenu
 </body>
 <html>
@@ -67,6 +67,9 @@ END;
     }
 
     private function creerListe() : string {
+        $token = $this->elem;
+        $server = $_SERVER['SERVER_NAME'];
+        $url = $server . $this->path;
         $html = <<<END
 <form  action="creerListe" method="post">
 <h2>Création d'une liste de souhaits</h2>
@@ -147,7 +150,7 @@ END;
 <form class="formNouvelleListe" action="creerListe">
     <input class="bouton" type="submit" name="creerListe" value="Créer une nouvelle Liste">
 </form>
-<div class="souhaits"> 
+<div class="souhaits">
     $res
 </div>
 END;
