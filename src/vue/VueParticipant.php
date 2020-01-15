@@ -28,6 +28,9 @@ class VueParticipant
             case 4:
                 $contenu = $this->afficherFormulaireReservation();
                 break;
+            case 5:
+                $contenu = $this->afficherAccueil();
+                break;
         }
 
         $path =  $this->path;
@@ -35,9 +38,21 @@ class VueParticipant
 <!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="$path/css/style.css">
+		<link rel="stylesheet" href="$path/../css/style.css">
 		<title>MyWisList</title>
 	</head>
+	<header>
+	 <div id="rubrique">
+	 <p id="titreR">MyWishList</p>
+	 <nav>
+	 <ul>
+		 <li><a href="index.html">Mes Listes</a></li>
+		 <li><a href="ListeSerie.html">Se connecter</a></li>
+		 <li><a href="A_Propos.html">S'inscrire</a></li>
+	 </ul>
+	 </nav>
+	 </div>
+ </header>
 <body>
     $contenu
 </body>
@@ -45,6 +60,19 @@ class VueParticipant
 END;
         return $html;
     }
+
+
+    private function afficherAccueil() :string {
+        $html = <<<END
+<div class="accueil">
+    <h1>Accueil</h1>
+</div>
+END;
+return $html;
+    }
+
+
+
 
     private function afficherItem() : string {
         $res = '<p>'. $this->elem[0]['nom'].'</p>';
@@ -92,21 +120,20 @@ return $html;
         else {
             $p="";
         }
-        $res = "<p>saisissez votre nom/pseudo : <br /></p>";
-        $formulaire = "<form action=\"\" method=\"post\">
-                           <div class=\"formLise\">
-                                <input type=\"text\" name=\"pseudo\" value='$p' required>
+        $formulaire = 
+            "<form action=\"\" method=\"post\">
+                <h2>Reserver un Item</h2>
+                           <div class=\"formulaire\">
+                                <input style=\"text-align:center\" type=\"text\" name=\"pseudo\" value='$p' placeholder='Pseudonyme' required>
                            </div>
-                           <div class=\"formLise\">
-                                <p>saisissez votre message (facultatif) : <br /></p>
-                                <input type=\"text\" name=\"message\">
+                           <div class=\"formulaire\">
+                                <input style=\"text-align:center\" type=\"text\" name=\"message\" placeholder='Message (facultatif)'>
                            </div>
-                           <div class=\"formLise\">
-                                <p><br /></p>
+                           <div class=\"formulaire\">
                                 <input type=\"submit\" value=\"Valider\" />
                            </div>
 		               </form>";
-        $res = $res.$formulaire;
+        $res = $formulaire;
         $html = <<<END
         <div class="formulaireReservation">
         $res

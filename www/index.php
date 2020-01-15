@@ -52,6 +52,22 @@ $app->get('/testVue/item/{id}[/]',
         return $controleur->getItem($req, $resp, $args);
     });
 
+//////////////////////////////////////////
+////           ACCUEIL                ////
+//////////////////////////////////////////
+
+$app->get('/accueil[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->afficherAccueil($req, $resp, $args);
+    });
+
+$app->post('/accueil[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->afficherAccueil($req, $resp, $args);
+    });
+
 
 //////////////////////////////////////////
 ////       ACCUEIL ET COMPTES         ////
