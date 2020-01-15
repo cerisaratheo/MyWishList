@@ -44,7 +44,7 @@ class Authentification
             'username'   => $user->username,
             'role_id'    => $user->role,
             'client_ip'  => $_SERVER['REMOTE_ADDR'],
-            'level' => $role->auth_level
+            //'level' => $role->auth_level
             );
     }
 
