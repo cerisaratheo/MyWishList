@@ -10,9 +10,20 @@ use mywishlist\models\Utilisateur;
 use mywishlist\vue\VueCreateur;
 use mywishlist\vue\VueCompte;
 
+/**
+ * Class ControleurCreateur
+ * @package mywishlist\controleur
+ */
 class ControleurCreateur
 {
 
+    /**
+     * Methode qui permet de creer une liste
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function creerListe($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
@@ -25,7 +36,6 @@ class ControleurCreateur
             $html = $vue->render(0);
         }
         else {
-            // A filter !
             $titre = $rq->getParsedBody()['titre'];
             $desc = $rq->getParsedBody()['desc'];
             $date = $rq->getParsedBody()['expiration'];
@@ -63,6 +73,13 @@ class ControleurCreateur
         return $rs;
     }
 
+    /**
+     * Methode qui permet de consulter les listes de souhaits
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function getListeSouhaits($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
@@ -83,6 +100,13 @@ class ControleurCreateur
         return $rs;
     }
 
+    /**
+     * Methode qui permet de consulter un item
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function accederItem($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
@@ -103,6 +127,13 @@ class ControleurCreateur
         return $rs;
     }
 
+    /**
+     * Methode privee qui permet de genererun token
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     private function genererToken($id){
         // On verifie que le token est n'existe pas deja dans la BDD
         do {
@@ -121,10 +152,17 @@ class ControleurCreateur
             }
         } while (! is_null($res));
 
-        $url =/* $rq->getURI()->getHost(). $rq->getURI()->getBasePath().'/participation/'.*/bin2hex($token);
+        $url =bin2hex($token);
         return $url;
     }
 
+    /**
+     * Methode privee qui permet d'acceder a une liste
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function accederListe($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
@@ -153,6 +191,13 @@ class ControleurCreateur
         return $rs;
     }
 
+    /**
+     * Methode privee qui permet de modifier une liste
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function modifierListe($rq,$rs,$args){
         $path = $rq->getURI()->getBasePath();
 
@@ -185,6 +230,13 @@ class ControleurCreateur
         return $rs;
         }
 
+    /**
+     * Methode privee qui permet d'ajouter un item
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function ajoutItem($rq, $rs, $args)
     {
         $path = $rq->getURI()->getBasePath();
@@ -198,7 +250,7 @@ class ControleurCreateur
                 ->where('token_modif', '=', $token)
                 ->first();
 
-            // WOW FILTRE / ! \
+
             $nom = $rq->getParsedBody()['nomItem'];
             $desc = $rq->getParsedBody()['descItem'];
             $prix = $rq->getParsedBody()['prixItem'];
@@ -225,6 +277,13 @@ class ControleurCreateur
         return $rs;
     }
 
+    /**
+     * Methode privee qui permet de modifier un item
+     * @param $rq
+     * @param $rs
+     * @param $args
+     * @return mixed la reponse http
+     */
     public function modifierItem($rq, $rs, $args)
     {
         $path = $rq->getURI()->getBasePath();
@@ -233,7 +292,6 @@ class ControleurCreateur
          $item = Item::where('id', '=', $idItem)
              ->firstOrFail();
 
-            // WOW FILTRE / ! \
         $nom = $rq->getParsedBody()['nomItem'];
         $desc = $rq->getParsedBody()['descItem'];
         $prix = $rq->getParsedBody()['prixItem'];
