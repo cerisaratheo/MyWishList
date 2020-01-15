@@ -3,18 +3,39 @@
 
 namespace mywishlist\vue;
 
-
+/**
+ * Class VueCompte
+ * @package mywishlist\vue
+ */
 class VueCompte
 {
+    /**
+     * @var valeurs quelconques
+     */
     private $elem;
+
+    /**
+     * @var debut de l'url
+     */
     private $path;
 
+    /**
+     * Constructeur de la classe.
+     * @param $tab valeurs quelconques
+     * @param $path debut de l'url
+     */
     function __construct($tab, $path)
     {
         $this->elem = $tab;
         $this->path = $path;
     }
 
+    /**
+     * Methode qui creee la base de la page html dont le contenu est
+     * cree par des fonctions privees
+     * @param int $index numero de la methode à utiliser
+     * @return string contenu html
+     */
     public function render(int $index) : string {
         switch ($index){
             case 0 :
@@ -49,6 +70,10 @@ END;
     }
 
 
+    /**
+     * Methode qui affiche l'accueil
+     * @return string contenu html
+     */
     private function afficherAccueil() :string {
         $html = <<<END
 <div class="accueil">
@@ -58,6 +83,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche le formulaire d'inscription
+     * @return string contenu html
+     */
     private function afficherFromulaireInscription() : string {
         $html = <<<END
 <form  action="" method="post">
@@ -76,6 +105,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche le formulaire de connexion
+     * @return string contenu html
+     */
     private function afficherFromulaireConnexion() : string {
 
         $erreur = "";
@@ -100,6 +133,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode static qui creer le header
+     * @return string contenu html
+     */
     public static function getHeader($path) : string {
         if (isset($_SESSION['profile'])) {
             $pseudo = $_SESSION['profile']['username'];
