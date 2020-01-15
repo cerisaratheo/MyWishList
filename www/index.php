@@ -127,13 +127,13 @@ $app->get('/creation/listes[/]',
 
 
 
-$app->get('/creation/modifierListe/{token}[/]',
+$app->get('/creation/liste/{token}/modifier[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierListe($req, $resp, $args);
     });
 
-$app->post('/creation/modifierListe/{token}[/]',
+$app->post('/creation/liste/{token}/modifier[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierListe($req, $resp, $args);
@@ -146,13 +146,13 @@ $app->get('/creation/liste/{token}[/]',
     });
 
 
-$app->get('/creation/{token}/ajouterItem[/]',
+$app->get('/creation/liste/{token}/ajouterItem[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->ajoutItem($req, $resp, $args);
     });
 
-$app->post('/creation/{token}/ajouterItem[/]',
+$app->post('/creation/liste/{token}/ajouterItem[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->ajoutItem($req, $resp, $args);
@@ -164,13 +164,13 @@ $app->get('/creation/liste/{token}/{item}[/]',
         return $controleur->accederItem($req, $resp, $args);
     });
 
-$app->get('/creation/modifier/{token}/{item}[/]',
+$app->get('/creation/liste/{token}/{item}/modifier[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierItem($req, $resp, $args);
     });
 
-$app->post('/creation/modifier/{token}/{item}[/]',
+$app->post('/creation/liste/{token}/{item}/modifier[/]',
     function($req, $resp, $args){
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierItem($req, $resp, $args);
@@ -187,16 +187,23 @@ $app->post('/creation/modifier/{token}/{item}[/]',
 
 $app->get('/participation/{token}[/]',
     function($req, $resp, $args) {
-        return $resp;
+        $controleur = new ControleurParticipant($this);
+        return $controleur->afficherParticipation($req, $resp, $args);
     });
 
-$app->get('/reservation/item/{id}[/]',
+$app->get('/participation/{token}/{item}[/]',
+    function($req, $resp, $args) {
+        $controleur = new ControleurParticipant($this);
+        return $controleur->afficherParticipationItem($req, $resp, $args);
+    });
+
+$app->get('/participation/{token}/{item}/reservation[/]',
     function($req, $resp, $args) {
         $controleur = new ControleurParticipant($this);
         return $controleur->afficherFormulaireReservation($req, $resp, $args);
     });
 
-$app->post("/reservation/item/{id}[/]",
+$app->post("/participation/{token}/{item}/reservation[/]",
     function($req, $resp, $args) {
         $controleur = new ControleurParticipant($this);
         return $controleur->reserverItem($req, $resp, $args);

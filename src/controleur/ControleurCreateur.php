@@ -48,7 +48,7 @@ class ControleurCreateur
             $liste->token_participation = $tokenParticipation;
             $liste->save();
 
-            $vue = new VueCreateur("", $path);
+            $vue = new VueCreateur($tokenParticipation, $path);
             $html = $vue->render(0);
         }
 
