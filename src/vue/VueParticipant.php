@@ -28,6 +28,9 @@ class VueParticipant
             case 4:
                 $contenu = $this->afficherFormulaireReservation();
                 break;
+            case 5:
+                $contenu = $this->afficherAccueil();
+                break;
         }
 
         $path =  $this->path;
@@ -57,6 +60,19 @@ class VueParticipant
 END;
         return $html;
     }
+
+
+    private function afficherAccueil() :string {
+        $html = <<<END
+<div class="accueil">
+    <h1>Accueil</h1>
+</div>
+END;
+return $html;
+    }
+
+
+
 
     private function afficherItem() : string {
         $res = '<p>'. $this->elem[0]['nom'].'</p>';

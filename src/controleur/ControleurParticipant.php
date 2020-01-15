@@ -5,9 +5,23 @@ namespace mywishlist\controleur;
 
 
 use mywishlist\models\Reservation;
+use mywishlist\vue\VueParticipant;
 
 class ControleurParticipant
 {
+
+    public function afficherAccueil($rq, $rs, $args) {
+        $path = $rq->getURI()->getBasePath();
+        $vue = new VueParticipant("", $path);
+
+        $html = $vue->render(5);
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+
+
+
 
     public function getItem($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
