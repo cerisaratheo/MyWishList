@@ -55,8 +55,6 @@ Créateur :
 	Etat : La modification de l’item est possible après la réservation de cet item
 	
 
-13 . Supprimer une image d’un item
-
 14 . Partage une liste - Jayson
 
 	Etat : Etat : Entierement fait.
@@ -88,6 +86,8 @@ Fonctionnalités non réalisées :
 
 12 . Modifier une image d’un item
 
+13 . Supprimer une image d’un item
+
 15 . Consulter les réservation d’une liste avant échéance
 
 16 . Consulter les réservations et messages d’une de ses listes après échéance
@@ -118,4 +118,16 @@ Installation sur une machine quelconque :
 
  - Executer le script base_mywishlist.sql pour avoir une base de donnée utilisable.
 
- - Executer la commande "composer install" dans le dossier src.
+ - Executer la commande "composer install" dans le dossier src pour importer les librairies nécessaires.
+ 
+ - Dans src, il faut créer un répertoire "conf" dans lequel il faut créer un fichier "conf.ini".
+   Ce fichier se présente sous la forme suivante et sera à compléter pour établir la connexion à la base de donnée :
+   
+       driver=
+       username=
+       password=
+       host=
+       database=
+       charset=utf8
+       collation=utf8_unicode_ci
+
