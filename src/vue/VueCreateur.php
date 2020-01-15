@@ -118,10 +118,13 @@ END;
     private function afficherListe() : string {
         $titre = $this->elem['liste']->titre;
         $token = $this->elem['liste']->token_modif;
+        $server = $_SERVER['SERVER_NAME'];
+        $url = $server . $this->path;
         $items = '';
         foreach ($this->elem['items'] as $item)
             $items = $items . '<p><a class="lienItem" href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
+<p>Le lien de partage est le suivant : $url/participation/$token</p>
 <div class="liste">
     <h1>$titre</h1>
     <div>$items</div>
