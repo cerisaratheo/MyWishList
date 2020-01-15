@@ -67,6 +67,9 @@ END;
     }
 
     private function creerListe() : string {
+        $token = $this->elem;
+        $server = $_SERVER['SERVER_NAME'];
+        $url = $server . $this->path;
         $html = <<<END
 <form  action="creerListe" method="post">
 <h2>Création d'une liste de souhaits</h2>
@@ -84,7 +87,7 @@ END;
         <input type="submit" value="Creer">
     </div>
 </form>
-<p>Le lien de partage est le suivant : $this->path</p>
+<p>Le lien de partage est le suivant : $url/participation/$token</p>
 END;
         return $html;
     }
