@@ -10,7 +10,7 @@ Participant :
 
 1 . Afficher une liste de souhaits - Jérôme
 
-Etat : La liste est affichée en détaille à partir d’un token. L'état de la réservation n’est pas affiché, la date d’échéance n’est pas prise en compte.
+	Etat : La liste est affichée en détaille à partir d’un token. L'état de la réservation n’est pas affiché, la date d’échéance n’est pas prise en compte.
 
 
 2 . Afficher un item d'une liste - Jérôme
@@ -27,7 +27,7 @@ Une fois que vous vous trouvez sur le lien affichant l’item et le bouton de r�
 
 4 . Ajouter un message avec sa réservation - Théo
 
-Etat : Comme la réservation d’item, l’ajout d’un message lors de la réservation ne fonctionne plus → demande un changement du lien
+	Etat : Comme la réservation d’item, l’ajout d’un message lors de la réservation ne fonctionne plus → demande un changement du lien
 
 
 5 . Ajouter un message sur une liste
