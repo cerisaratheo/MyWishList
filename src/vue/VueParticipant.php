@@ -34,16 +34,17 @@ class VueParticipant
         }
 
         $path =  $this->path;
+        // $path/../css/style.css pour webetu
         $html = <<<END
 <!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="$path/../css/style.css">
+		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
 	<header>
 	 <div id="rubrique">
-	 <p id="titreR">MyWishList</p>
+	 <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
 	 <nav>
 	 <ul>
 		 <li><a href="index.html">Mes Listes</a></li>
@@ -62,14 +63,6 @@ END;
     }
 
 
-    private function afficherAccueil() :string {
-        $html = <<<END
-<div class="accueil">
-    <h1>Accueil</h1>
-</div>
-END;
-return $html;
-    }
 
 
 

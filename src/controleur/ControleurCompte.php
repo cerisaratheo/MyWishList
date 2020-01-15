@@ -5,10 +5,21 @@ namespace mywishlist\controleur;
 
 
 use mywishlist\vue\VueCompte;
-use mywishlist\vue\VueCreateur;
 
 class ControleurCompte
 {
+
+    public function afficherAccueil($rq, $rs, $args) {
+        $path = $rq->getURI()->getBasePath();
+        $vue = new VueCompte("", $path);
+
+        $html = $vue->render(2);
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+
+
 
     public function creerCompte($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();

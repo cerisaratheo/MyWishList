@@ -23,7 +23,9 @@ class VueCompte
             case 1 :
                 $contenu = $this->afficherFromulaireConnexion();
                 break;
-
+            case 2 :
+                $contenu = $this->afficherAccueil();
+                break;
         }
 
         $path =  $this->path;
@@ -36,12 +38,12 @@ class VueCompte
 	</head>
 		<header>
 	 <div id="rubrique">
-	 <p id="titreR">MyWishList</p>
+	 <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
 	 <nav>
 	 <ul>
-		 <li><a href="index.html">Mes Listes</a></li>
-		 <li><a href="ListeSerie.html">Se connecter</a></li>
-		 <li><a href="A_Propos.html">S'inscrire</a></li>
+		 <li><a href="creation/listes">Mes Listes</a></li>
+		 <li><a href="connexion">Se connecter</a></li>
+		 <li><a href="inscription">S'inscrire</a></li>
 	 </ul>
 	 </nav>
 	 </div>
@@ -50,6 +52,16 @@ class VueCompte
     $contenu
 </body>
 <html>
+END;
+        return $html;
+    }
+
+
+    private function afficherAccueil() :string {
+        $html = <<<END
+<div class="accueil">
+    <h1>Accueil</h1>
+</div>
 END;
         return $html;
     }

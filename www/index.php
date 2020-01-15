@@ -52,31 +52,45 @@ $app->get('/testVue/item/{id}[/]',
         return $controleur->getItem($req, $resp, $args);
     });
 
+
 //////////////////////////////////////////
 ////           ACCUEIL                ////
 //////////////////////////////////////////
 
 $app->get('/accueil[/]',
     function($req, $resp, $args) {
-        $controleur = new ControleurParticipant($this);
-        return $controleur->afficherAccueil($req, $resp, $args);
-    });
-
-$app->post('/accueil[/]',
-    function($req, $resp, $args) {
-        $controleur = new ControleurParticipant($this);
+        $controleur = new ControleurCompte($this);
         return $controleur->afficherAccueil($req, $resp, $args);
     });
 
 
 //////////////////////////////////////////
-////       ACCUEIL ET COMPTES         ////
+////           COMPTES                ////
 //////////////////////////////////////////
 
-$app->get('/accueil[/]',
-    function($req, $resp, $args) {
-        $controleur = new ControleurCreateur($this);
-        return $controleur->creerListe($req, $resp, $args);
+
+$app->get('/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCompte($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
+
+$app->post('/inscription[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCompte($this);
+        return $controleur->creerCompte($req, $resp, $args);
+    });
+
+$app->get('/connexion[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCompte($this);
+        return $controleur->seConnecter($req, $resp, $args);
+    });
+
+$app->post('/connexion[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCompte($this);
+        return $controleur->seConnecter($req, $resp, $args);
     });
 
 
@@ -96,7 +110,6 @@ $app->post('/creation/creerListe[/]',
         $controleur = new ControleurCreateur($this);
         return $controleur->creerListe($req, $resp, $args);
     });
-
 
 
 
@@ -159,32 +172,8 @@ $app->post('/creation/modifier/{token}/{item}[/]',
     });
 
 //////////////////////////////////////////
-////              COMPTES             ////
+////              vide             ////
 //////////////////////////////////////////
-
-$app->get('/inscription[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCompte($this);
-        return $controleur->creerCompte($req, $resp, $args);
-    });
-
-$app->post('/inscription[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCompte($this);
-        return $controleur->creerCompte($req, $resp, $args);
-    });
-
-$app->get('/connexion[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCompte($this);
-        return $controleur->seConnecter($req, $resp, $args);
-    });
-
-$app->post('/connexion[/]',
-    function($req, $resp, $args){
-        $controleur = new ControleurCompte($this);
-        return $controleur->seConnecter($req, $resp, $args);
-    });
 
 
 //////////////////////////////////////////
