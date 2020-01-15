@@ -43,8 +43,7 @@ class Authentification
             'id' => $user->uid,
             'username'   => $user->username,
             'role_id'    => $user->role,
-            'client_ip'  => $_SERVER['REMOTE_ADDR'],
-            'level' => $role->auth_level
+            'client_ip'  => $_SERVER['REMOTE_ADDR']
             );
     }
 
