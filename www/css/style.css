@@ -152,3 +152,24 @@ input[type="submit"] {
     padding: .8em 0;
     width: 500px;
 }
+
+.bouton {
+    display: flex;
+    margin : auto;
+    justify-content: center;
+}
+
+.formNouvelleListe {
+    background: none;
+    box-shadow: none;
+}
+
+.formModifItem {
+    background: none;
+    box-shadow: none;
+}
+
+.formSuppListe {
+    background: none;
+    box-shadow: none;
+}

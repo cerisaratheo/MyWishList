@@ -84,6 +84,7 @@ END;
         <input type="submit" value="Creer">
     </div>
 </form>
+<p>Le lien de partage est le suivant : $this->path</p>
 END;
         return $html;
     }
@@ -91,7 +92,7 @@ END;
     private function modifierListe() : string {
        $token = $this->elem;
         $html = <<<END
-<form  action="$token" method="post">
+<form  action="" method="post">
 <h2>Modification d'une liste de souhaits</h2>
     <div class="formulaire">
         <input style="text-align:center" type="text" name="titre" placeholder="Titre" required>
@@ -122,6 +123,12 @@ $html = <<<END
     <h1>$titre</h1>
     <div>$items</div>
 </div>
+<form class="formSuppListe" action="$token/modifier">
+    <input class="bouton" type="submit" value="Modifier">
+</form>
+<form class="formSuppListe" action="$token/ajouterItem">
+    <input class="bouton" type="submit" value="Ajouter un Item">
+</form>
 END;
         return $html;
     }
@@ -140,6 +147,9 @@ END;
 <div class="souhaits"> 
     $res
 </div>
+<form class="formNouvelleListe" action="creerListe">
+    <input class="bouton" type="submit" name="creerListe" value="Créer une nouvelle Liste">
+</form>
 END;
         return $html;
     }
@@ -147,6 +157,7 @@ END;
     private function afficherItem() : string {
         $nom = $this->elem->nom ;
         $descr = $this->elem->descr;
+        $id = $this->elem->id;
         $img = 'Pas d\'image pour l\'instant';
         $html = <<<END
 <div class="item">
@@ -154,6 +165,9 @@ END;
     <p>$descr</p>
     <p>$img</p>
 </div>
+<form class="formModifItem" action="$id/modifier">
+    <input class="bouton" type="submit" name="modifItem" value="Modifier">
+</form>
 END;
         return $html;
     }
@@ -204,7 +218,7 @@ END;
         $lien = "Lien : " . $this->elem['lien'];
 
         $html = <<<END
-<form action="$idItem" method="POST">
+<form action="" method="POST">
     <h2>Modifier un Item</h2>
     <div class="formulaire">
         <input style="text-align:center" type="text" name="nomItem" placeholder="$nom"><br>

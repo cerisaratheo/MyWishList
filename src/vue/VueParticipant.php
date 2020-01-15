@@ -29,7 +29,10 @@ class VueParticipant
                 $contenu = $this->afficherFormulaireReservation();
                 break;
             case 5:
-                $contenu = $this->afficherAccueil();
+                $contenu = $this->afficherParticipation();
+                break;
+            case 6:
+                $contenu = $this->afficherParticipationItem();
                 break;
         }
 
@@ -63,9 +66,38 @@ END;
     }
 
 
+    private function afficherParticipation() {
+        $titre = $this->elem['liste']->titre;
+        $token = $this->elem['liste']->token_participation;
+        $items = '';
+        foreach ($this->elem['items'] as $item)
+            $items = $items . '<p><a class="lienItem" href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
+        $html = <<<END
+<div class="liste">
+    <h1>$titre</h1>
+    <div>$items</div>
+</div>
+END;
+        return $html;
+    }
 
-
-
+    private function afficherParticipationItem() {
+        $nom = $this->elem->nom ;
+        $descr = $this->elem->descr;
+        $id = $this->elem->id;
+        $img = 'Pas d\'image pour l\'instant';
+        $html = <<<END
+<div class="item">
+    <h3>$nom :</h3>
+    <p>$descr</p>
+    <p>$img</p>
+</div>
+<form class="formModifItem" action="reservation">
+    <input class="bouton" type="submit" name="modifItem" value="Reserver">
+</form>
+END;
+        return $html;
+    }
 
     private function afficherItem() : string {
         $res = '<p>'. $this->elem[0]['nom'].'</p>';
