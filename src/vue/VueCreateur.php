@@ -58,7 +58,7 @@ class VueCreateur
 	</head>
 <body>
 	$header
-    
+
     $contenu
 </body>
 <html>
@@ -87,7 +87,6 @@ END;
         <input type="submit" value="Creer">
     </div>
 </form>
-<p>Le lien de partage est le suivant : $url/participation/$token</p>
 END;
         return $html;
     }
@@ -129,6 +128,7 @@ $html = <<<END
     <h1>$titre</h1>
     <div>$items</div>
 </div>
+<p>Le lien de partage est le suivant : $this->path</p>
 <form class="formSuppListe" action="$token/modifier">
     <input class="bouton" type="submit" value="Modifier">
 </form>
@@ -153,7 +153,7 @@ END;
 <form class="formNouvelleListe" action="creerListe">
     <input class="bouton" type="submit" name="creerListe" value="Créer une nouvelle Liste">
 </form>
-<div class="souhaits"> 
+<div class="souhaits">
     $res
 </div>
 END;

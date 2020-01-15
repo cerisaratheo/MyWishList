@@ -18,6 +18,9 @@ html, body{
     display:flex;
     justify-content: center;
     padding : 50px;
+    border:2px solid white;
+    margin: auto;
+    width: 40%;
 }
 
 .lienListe {
