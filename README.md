@@ -22,7 +22,7 @@ Participant :
 
 	Etat : Le bouton existe (ainsi que les méthodes) mais la réservation ne fonctionne plus (après l’ajout sur webetu) → le lien est mauvais, il faut donc le changer pour pouvoir accéder à la fonctionnalité
 	
-Une fois que vous vous trouvez sur le lien affichant l’item et le bouton de réservation (un lien de ce type : webetu.iutnc.univ-lorraine.fr/www/cerisara1u/MyWishList/www/index.php/participation/nosecure1/23 ), il suffit de rajouter “/reservation” à la fin de l’url et nous accédons à la partie de réservation.
+	Une fois que vous vous trouvez sur le lien affichant l’item et le bouton de réservation (un lien de ce type : webetu.iutnc.univ-lorraine.fr/www/cerisara1u/MyWishList/www/index.php/participation/nosecure1/23 ), il suffit de rajouter “/reservation” à la fin de l’url et nous accédons à la partie de réservation.
 
 
 4 . Ajouter un message avec sa réservation - Théo
