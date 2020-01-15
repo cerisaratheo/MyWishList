@@ -3,25 +3,43 @@
 
 namespace mywishlist\vue;
 
-
+/**
+ * Class VueCreateur
+ * @package mywishlist\vue
+ */
 class VueCreateur
 {
+    /**
+     * @var valeurs quelconques
+     */
     private $elem;
+
+    /**
+     * @var debut de l'url
+     */
     private $path;
 
+    /**
+     * Constructeur de la classe.
+     * @param $tab valeurs quelconques
+     * @param $path debut de l'url
+     */
     function __construct($tab, $path)
     {
         $this->elem = $tab;
         $this->path = $path;
     }
 
+    /**
+     * Methode qui creee la base de la page html dont le contenu est
+     * cree par des fonctions privees
+     * @param int $index numero de la methode à utiliser
+     * @return string contenu html
+     */
     public function render(int $index) : string {
         switch ($index){
             case 0 :
                 $contenu = $this->creerListe();
-                break;
-            case 1 :
-                $contenu = $this->afficherToken();
                 break;
             case 2 :
                 $contenu = $this->afficherListe();
@@ -37,9 +55,6 @@ class VueCreateur
                 break;
             case 6 :
                 $contenu = $this->modifierListe();
-                break;
-            case 7 :
-                // place libre
                 break;
             case 8 :
                 $contenu = $this->afficherFormulaireModifierItem();
@@ -66,6 +81,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche le formulaire de creation d'une liste
+     * @return string contenu html
+     */
     private function creerListe() : string {
         $token = $this->elem;
         $server = $_SERVER['SERVER_NAME'];
@@ -91,6 +110,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche le formulaire de modification d'une liste
+     * @return string contenu html
+     */
     private function modifierListe() : string {
        $token = $this->elem;
         $html = <<<END
@@ -114,6 +137,10 @@ END;
     return $html;
     }
 
+    /**
+     * Methode qui affiche une liste
+     * @return string contenu html
+     */
     private function afficherListe() : string {
         $titre = $this->elem['liste']->titre;
         $token = $this->elem['liste']->token_modif;
@@ -139,6 +166,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche toutes les listes d'un utilisateur
+     * @return string contenu html
+     */
     private function afficherListesSouhaits() : string {
         $res = "";
         foreach ($this->elem as $liste){
@@ -160,6 +191,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche un item
+     * @return string contenu html
+     */
     private function afficherItem() : string {
         $nom = $this->elem->nom ;
         $descr = $this->elem->descr;
@@ -178,20 +213,10 @@ END;
         return $html;
     }
 
-    private function afficherToken() : string {
-        $html = <<<END
-<form action="creerListe" method="POST">
-  <button type="submit" name="token" value="1">
-    Générer le lien de partage
-  </button>
-</form>
-<div class="items">
-    <p>Token : $this->elem</p>
-</div>
-END;
-        return $html;
-    }
-
+    /**
+     * Methode qui affiche le formulaire d'ajout d'un item
+     * @return string contenu html
+     */
     private function afficherFormulaireAjoutItem() : string {
         $html = <<<END
 <form action="ajouterItem" method="POST">
@@ -216,6 +241,10 @@ END;
         return $html;
     }
 
+    /**
+     * Methode qui affiche le formulaire de modification d'un item
+     * @return string contenu html
+     */
     private function afficherFormulaireModifierItem() : string {
         $idItem = $this->elem['id'];
         $nom = "Nom : " . $this->elem['nom'];
