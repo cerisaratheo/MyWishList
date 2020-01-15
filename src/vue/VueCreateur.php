@@ -128,7 +128,6 @@ $html = <<<END
     <h1>$titre</h1>
     <div>$items</div>
 </div>
-<p>Le lien de partage est le suivant : $this->path</p>
 <form class="formSuppListe" action="$token/modifier">
     <input class="bouton" type="submit" value="Modifier">
 </form>
