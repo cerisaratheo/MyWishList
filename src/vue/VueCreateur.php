@@ -123,12 +123,12 @@ END;
         foreach ($this->elem['items'] as $item)
             $items = $items . '<p><a class="lienItem" href="'. $token . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
-<p>Le lien de partage est le suivant : $url/participation/$token</p>
+
 <div class="liste">
     <h1>$titre</h1>
     <div>$items</div>
 </div>
-<p>Le lien de partage est le suivant : $this->path</p>
+<p>Le lien de partage est le suivant : $url/participation/$token</p>
 <form class="formSuppListe" action="$token/modifier">
     <input class="bouton" type="submit" value="Modifier">
 </form>
