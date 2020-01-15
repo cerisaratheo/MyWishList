@@ -81,16 +81,30 @@ Extensions :
 
 
 Fonctionnalités non réalisées : 
+
 10 . Supprimer un item
+
 11 . Rajouter une image à un item
+
 12 . Modifier une image d’un item
+
 15 . Consulter les réservation d’une liste avant échéance
+
 16 . Consulter les réservations et messages d’une de ses listes après échéance
+
 19 . Modifier son compte
+
 20 . Rendre une liste publique
+
 21 . Afficher les listes de souhaits publiques
+
 23 . Participer à une cagnotte
+
 24 . Uploader une image
+
 25 . Créer un compte participant
+
 26 . Afficher la liste des créateurs
+
 27 . Supprimer son compte
+
