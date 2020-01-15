@@ -127,11 +127,12 @@ END;
     }
 
     private function afficherListesSouhaits() : string {
-        $res = "<p>";
+        $res = "";
         foreach ($this->elem as $liste){
-            $res = $res . $liste['titre'] . '<br>';
+            $token = $liste['token_modif'];
+            $res = $res . "<p><a href=\"".$this->path."/creation/liste/".$token."\">".$liste['titre'].'</a></p>';
         }
-        $res = $res /*. var_dump($this->elem)*/."</p>";
+        $res = $res /*. var_dump($this->elem)*/."";
         $html = <<<END
 <div class="souhaits"> 
     $res
