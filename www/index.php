@@ -24,35 +24,6 @@ $configuration = [
 $c=new\Slim\Container($configuration);
 $app = new \Slim\App($c);
 
-
-//////////////////////////////////////////
-////          TESTS                   ////
-//////////////////////////////////////////
-
-$app->get('/liste[/]',
-    function(Request$req, Response$resp, $args) {
-        $res = '<h3>Liste des souhaits</h3>';
-        $souhaits = Liste::select('*')
-            -> get();
-        foreach ($souhaits as $souhait)
-            $res = $res . '<p>'.$souhait->no.' - '.$souhait->titre.'</p>';
-        $resp->getBody()->write($res);
-        return $resp;
-});
-
-$app->get('/testVue/listes[/]',
-    function(Request$req, Response$resp, $args) {
-        $controleur = new ControleurParticipant($this);
-        return $controleur->getListeSouhaits($req, $resp, $args);
-});
-
-$app->get('/testVue/item/{id}[/]',
-    function($req, $resp, $args) {
-        $controleur = new ControleurParticipant($this);
-        return $controleur->getItem($req, $resp, $args);
-    });
-
-
 //////////////////////////////////////////
 ////           ACCUEIL                ////
 //////////////////////////////////////////
@@ -175,10 +146,6 @@ $app->post('/creation/liste/{token}/{item}/modifier[/]',
         $controleur = new ControleurCreateur($this);
         return $controleur->modifierItem($req, $resp, $args);
     });
-
-//////////////////////////////////////////
-////              vide             ////
-//////////////////////////////////////////
 
 
 //////////////////////////////////////////

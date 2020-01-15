@@ -16,7 +16,7 @@ use mywishlist\vue\VueParticipant;
 class ControleurParticipant
 {
 
-    /**
+    /** Methode qui affiche la liste grace a l'url et le token
      * @param $rq
      * @param $rs
      * @param $args
@@ -48,7 +48,7 @@ class ControleurParticipant
         return $rs;
     }
 
-    /**
+    /** Methode qui affiche un item d'une liste
      * @param $rq
      * @param $rs
      * @param $args
@@ -111,7 +111,7 @@ class ControleurParticipant
         return $rs;
     }
 
-    /**
+    /** Methode qui affiche un formulaire pour reserver l'item
      * @param $rq
      * @param $rs
      * @param $args
@@ -135,7 +135,7 @@ class ControleurParticipant
         return $rs;
     }
 
-    /**
+    /** Methode qui permet de reserver un item
      * @param $rq
      * @param $rs
      * @param $args
