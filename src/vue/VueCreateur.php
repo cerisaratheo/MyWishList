@@ -122,9 +122,9 @@ END;
         $url = $server . $this->path;
         $items = '';
         foreach ($this->elem['items'] as $item)
-            $items = $items . '<p><a class="lienItem" href="'. $tokenmodif . "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
+            $items = $items . '<p><a class="lienItem" href="'. $token. "/" . $item->id.'">'.$item->id.' - '.$item->nom.'</a></p>';
 $html = <<<END
-<p>Le lien de partage est le suivant : $url/participation/$token</p>
+<p>Le lien de partage est le suivant : $url/participation/$tokenmodif</p>
 <div class="liste">
     <h1>$titre</h1>
     <div>$items</div>
