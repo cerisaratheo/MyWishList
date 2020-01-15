@@ -104,21 +104,20 @@ return $html;
         else {
             $p="";
         }
-        $res = "<p>saisissez votre nom/pseudo : <br /></p>";
-        $formulaire = "<form action=\"\" method=\"post\">
-                           <div class=\"formLise\">
-                                <input type=\"text\" name=\"pseudo\" value='$p' required>
+        $formulaire = 
+            "<form action=\"\" method=\"post\">
+                <h2>Reserver un Item</h2>
+                           <div class=\"formulaire\">
+                                <input style=\"text-align:center\" type=\"text\" name=\"pseudo\" value='$p' placeholder='Pseudonyme' required>
                            </div>
-                           <div class=\"formLise\">
-                                <p>saisissez votre message (facultatif) : <br /></p>
-                                <input type=\"text\" name=\"message\">
+                           <div class=\"formulaire\">
+                                <input style=\"text-align:center\" type=\"text\" name=\"message\" placeholder='Message (facultatif)'>
                            </div>
-                           <div class=\"formLise\">
-                                <p><br /></p>
+                           <div class=\"formulaire\">
                                 <input type=\"submit\" value=\"Valider\" />
                            </div>
 		               </form>";
-        $res = $res.$formulaire;
+        $res = $formulaire;
         $html = <<<END
         <div class="formulaireReservation">
         $res
