@@ -64,7 +64,8 @@ class ControleurCreateur
             $html = $vue->render(2);
         }
         else {
-            $listes = \mywishlist\models\Liste::where('user_id', '=', $_SESSION['profile']['id'])->get();
+            $listes = \mywishlist\models\Liste::where('user_id', '=', $_SESSION['profile']['id'])
+                ->first();
 
             $vue = new \mywishlist\vue\VueCreateur( $listes->toArray(), $path );
             $html = $vue->render( 5 );
