@@ -7,9 +7,18 @@ namespace mywishlist\controleur;
 use mywishlist\models\Role;
 use mywishlist\models\Utilisateur;
 
+/**
+ * Class Authentification
+ * @package mywishlist\controleur
+ */
 class Authentification
 {
 
+    /**
+     * Methode static qui permet de creer un utilisateur
+     * @param $userName nom de l'utilisateur
+     * @param $password mot de passe de l'utilisation
+     */
     public static function createUser($userName, $password){
         // A faire : vérifier la conformité de $password avec la police
         // si ok :
@@ -22,6 +31,11 @@ class Authentification
         $newUser->save();
     }
 
+    /**
+     * Methode static qui permet de s'authentifier
+     * @param $userName nom de l'utilisateur
+     * @param $password mot de passe de l'utilisation
+     */
     public static function authenticate( $username, $password) {
         $user = Utilisateur::select('*')
             ->where("username","=",$username)
@@ -35,6 +49,10 @@ class Authentification
             else return false;
     }
 
+    /**
+     * Methode qui charge un profile utilisateur dans une variable de session
+     * @param $user utilisateur
+     */
     private static function loadProfile($user){
         $role = $user->role()
             ->first();
@@ -47,6 +65,11 @@ class Authentification
             );
     }
 
+    /**
+     * Methode qui permet de controler les droits d'accès
+     * @param $required niveau requis
+     * @throws AuthException
+     */
     public static function checkAccessRights($required){
         if ($_SESSION['profile']['level'] < $required)
             throw new AuthException ;

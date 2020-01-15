@@ -157,7 +157,7 @@ class ControleurCreateur
     }
 
     /**
-     * Methode privee qui permet d'acceder a une liste
+     * Methode qui permet d'acceder a une liste
      * @param $rq
      * @param $rs
      * @param $args
@@ -192,7 +192,7 @@ class ControleurCreateur
     }
 
     /**
-     * Methode privee qui permet de modifier une liste
+     * Methode qui permet de modifier une liste
      * @param $rq
      * @param $rs
      * @param $args
@@ -231,7 +231,7 @@ class ControleurCreateur
         }
 
     /**
-     * Methode privee qui permet d'ajouter un item
+     * Methode qui permet d'ajouter un item
      * @param $rq
      * @param $rs
      * @param $args
@@ -278,7 +278,7 @@ class ControleurCreateur
     }
 
     /**
-     * Methode privee qui permet de modifier un item
+     * Methode qui permet de modifier un item
      * @param $rq
      * @param $rs
      * @param $args
