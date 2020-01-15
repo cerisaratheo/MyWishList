@@ -28,7 +28,9 @@ class VueCompte
                 break;
         }
 
-        $path =  $this->path;
+        $path = $this->path;
+        $header = self::getHeader($path);
+
         $html = <<<END
 <!DOCTYPE html>
 	<head>
@@ -36,19 +38,9 @@ class VueCompte
 		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
-		<header>
-	 <div id="rubrique">
-	 <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
-	 <nav>
-	 <ul>
-		 <li><a href="creation/listes">Mes Listes</a></li>
-		 <li><a href="connexion">Se connecter</a></li>
-		 <li><a href="inscription">S'inscrire</a></li>
-	 </ul>
-	 </nav>
-	 </div>
- </header>
 <body>
+	$header
+    
     $contenu
 </body>
 <html>
@@ -104,6 +96,33 @@ $erreur
         <input type="submit" value="Valider">
     </div>
 </form>
+END;
+        return $html;
+    }
+
+    public static function getHeader($path) : string {
+        if (isset($_SESSION['profile'])) {
+            $pseudo = $_SESSION['profile']['username'];
+            $option = "<li><a href=\"$path/creation/listes\">Mes Listes</a></li>
+                        <li><a href=\"$path/deconnexion\">Se déconnecter</a></li>
+		                <li>$pseudo</li>";
+        } else {
+            $option = "<li><a href=\"$path/connexion\">Se connecter</a></li>
+		                <li><a href=\"$path/inscription\">S'inscrire</a></li>";
+        }
+
+        $html = <<<END
+<header>
+     <div id="rubrique">
+         <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
+         <nav>
+             <ul>
+                  $option
+             </ul>
+         </nav>
+     </div>
+</header>
+
 END;
         return $html;
     }

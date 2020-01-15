@@ -33,7 +33,7 @@ class VueCreateur
                 $contenu = $this->afficherItem();
                 break;
             case 5 :
-                // place libre
+                $contenu = $this->afficherListesSouhaits();
                 break;
             case 6 :
                 $contenu = $this->modifierListe();
@@ -46,7 +46,9 @@ class VueCreateur
                 break;
         }
 
-        $path =  $this->path;
+        $path = $this->path;
+        $header = VueCompte::getHeader($path);
+
         $html = <<<END
 <!DOCTYPE html>
 	<head>
@@ -54,19 +56,9 @@ class VueCreateur
 		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
-		<header>
-	 <div id="rubrique">
-	 <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
-	 <nav>
-	 <ul>
-          <li><a href="$path/creation/listes">Mes Listes</a></li>
-		 <li><a href="$path/connexion">Se connecter</a></li>
-		 <li><a href="$path/inscription">S'inscrire</a></li>
-	 </ul>
-	 </nav>
-	 </div>
- </header>
 <body>
+	$header
+    
     $contenu
 </body>
 <html>
@@ -129,6 +121,20 @@ $html = <<<END
 <div class="liste">
     <h1>$titre</h1>
     <div>$items</div>
+</div>
+END;
+        return $html;
+    }
+
+    private function afficherListesSouhaits() : string {
+        $res = "<p>";
+        foreach ($this->elem as $liste){
+            $res = $res . $liste['titre'] . '<br>';
+        }
+        $res = $res /*. var_dump($this->elem)*/."</p>";
+        $html = <<<END
+<div class="souhaits"> 
+    $res
 </div>
 END;
         return $html;

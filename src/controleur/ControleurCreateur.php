@@ -8,6 +8,7 @@ use mywishlist\models\Item;
 use mywishlist\models\Liste;
 use mywishlist\models\Utilisateur;
 use mywishlist\vue\VueCreateur;
+use mywishlist\vue\VueCompte;
 
 class ControleurCreateur
 {
@@ -15,7 +16,11 @@ class ControleurCreateur
     public function creerListe($rq, $rs, $args){
         $path = $rq->getURI()->getBasePath();
 
-        if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
+        if (! isset($_SESSION['profile'])) {
+            $vue = new VueCompte("", $path);
+            $html = $vue->render(2);
+        }
+        else if (! isset($rq->getParsedBody()['titre']) || ! isset($rq->getParsedBody()['desc']) || ! isset($rq->getParsedBody()['expiration'])){
             $vue = new VueCreateur("", $path);
             $html = $vue->render(0);
         }
@@ -36,6 +41,7 @@ class ControleurCreateur
             // On sauvegarde la liste dans la BDD
             $liste = new Liste();
             $liste->titre = $titre;
+            $liste->user_id = $_SESSION['profile']['id'];
             $liste->description = $desc;
             $liste->expiration = $date;
             $liste->token_modif = $tokenModif;
@@ -44,7 +50,25 @@ class ControleurCreateur
 
             $vue = new VueCreateur("", $path);
             $html = $vue->render(0);
-            }
+        }
+
+        $rs->getBody()->write($html);
+        return $rs;
+    }
+
+    public function getListeSouhaits($rq, $rs, $args){
+        $path = $rq->getURI()->getBasePath();
+
+        if (! isset($_SESSION['profile'])) {
+            $vue = new VueCompte("", $path);
+            $html = $vue->render(2);
+        }
+        else {
+            $listes = \mywishlist\models\Liste::where('user_id', '=', $_SESSION['profile']['id'])->get();
+
+            $vue = new \mywishlist\vue\VueCreateur( $listes->toArray(), $path );
+            $html = $vue->render( 5 );
+        }
 
         $rs->getBody()->write($html);
         return $rs;

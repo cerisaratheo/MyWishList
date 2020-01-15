@@ -93,6 +93,11 @@ $app->post('/connexion[/]',
         return $controleur->seConnecter($req, $resp, $args);
     });
 
+$app->get('/deconnexion[/]',
+    function($req, $resp, $args){
+        $controleur = new ControleurCompte($this);
+        return $controleur->seDeconnecter($req, $resp, $args);
+    });
 
 
 //////////////////////////////////////////
@@ -115,7 +120,7 @@ $app->post('/creation/creerListe[/]',
 
 $app->get('/creation/listes[/]',
     function(Request$req, Response$resp, $args) {
-        $controleur = new ControleurParticipant($this);
+        $controleur = new ControleurCreateur($this);
         return $controleur->getListeSouhaits($req, $resp, $args);
     });
 

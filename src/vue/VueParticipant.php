@@ -47,9 +47,9 @@ class VueParticipant
 	 <h1 id="titreR"><a href="$path/accueil">MyWishList </a></h1>
 	 <nav>
 	 <ul>
-		 <li><a href="index.html">Mes Listes</a></li>
-		 <li><a href="ListeSerie.html">Se connecter</a></li>
-		 <li><a href="A_Propos.html">S'inscrire</a></li>
+          <li><a href="$path/creation/listes">Mes Listes</a></li>
+		 <li><a href="$path/connexion">Se connecter</a></li>
+		 <li><a href="$path/inscription">S'inscrire</a></li>
 	 </ul>
 	 </nav>
 	 </div>

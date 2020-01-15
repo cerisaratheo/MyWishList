@@ -18,11 +18,11 @@ class Authentification
         $newUser = new Utilisateur();
         $newUser->username = $userName;
         $newUser->password = $hash;
-        $newUser->role = 1;
+        $newUser->role_id = 1;
         $newUser->save();
     }
 
-    public static function authenticate( $username, $password){
+    public static function authenticate( $username, $password) {
         $user = Utilisateur::select('*')
             ->where("username","=",$username)
             ->first();
@@ -36,15 +36,15 @@ class Authentification
     }
 
     private static function loadProfile($user){
-        $role = /*Utilisateur::role()
-            ->where('uid','=',$user->id)
-            ->first();*/
-        $role = Role::users()->get();
+        $role = $user->role()
+            ->first();
+
         $_SESSION['profile'] = array(
+            'id' => $user->uid,
             'username'   => $user->username,
             'role_id'    => $user->role,
-            'client_ip'  => $_SERVER['REMOTE_ADDR']
-            //'level' => $role->auth_level
+            'client_ip'  => $_SERVER['REMOTE_ADDR'],
+            'level' => $role->auth_level
             );
     }
 
