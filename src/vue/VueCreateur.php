@@ -144,15 +144,12 @@ END;
         }
         $res = $res /*. var_dump($this->elem)*/."";
         $html = <<<END
-<div class="ajoutListe">
-    <a href="$this->path/creation/creerListe">Ajouter une liste</a>
-</div>
-<div class="souhaits"> 
-    $res
-</div>
 <form class="formNouvelleListe" action="creerListe">
     <input class="bouton" type="submit" name="creerListe" value="Créer une nouvelle Liste">
 </form>
+<div class="souhaits"> 
+    $res
+</div>
 END;
         return $html;
     }
