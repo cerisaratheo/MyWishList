@@ -1,4 +1,13 @@
 # MyWishList
+
+Membres du projet 
+
+    Jérôme DUBOIS
+    Théo CERISARA
+    Jayson DESNOYERS
+    Jonah L'HUILLIER
+    Vincent KBIDA
+
 Lien pour le site :
 https://webetu.iutnc.univ-lorraine.fr/www/cerisara1u/MyWishList/www/index.php/accueil
 
