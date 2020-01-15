@@ -38,6 +38,18 @@ class VueParticipant
 		<link rel="stylesheet" href="$path/css/style.css">
 		<title>MyWisList</title>
 	</head>
+	<header>
+	 <div id="rubrique">
+	 <p id="titreR">MyWishList</p>
+	 <nav>
+	 <ul>
+		 <li><a href="index.html">Mes Listes</a></li>
+		 <li><a href="ListeSerie.html">Se connecter</a></li>
+		 <li><a href="A_Propos.html">S'inscrire</a></li>
+	 </ul>
+	 </nav>
+	 </div>
+ </header>
 <body>
     $contenu
 </body>
