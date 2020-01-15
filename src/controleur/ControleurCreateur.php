@@ -48,8 +48,15 @@ class ControleurCreateur
             $liste->token_participation = $tokenParticipation;
             $liste->save();
 
-            $vue = new VueCreateur($tokenParticipation, $path);
-            $html = $vue->render(0);
+            $items = Item::select("*")
+                -> where('liste_id','=',$liste->no)
+                -> get();
+            $infos = array(
+                'liste' => $liste,
+                'items' => $items
+            );
+            $vue = new VueCreateur($infos, $path);
+            $html = $vue->render(2);
         }
 
         $rs->getBody()->write($html);
