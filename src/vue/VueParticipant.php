@@ -2,18 +2,33 @@
 
 namespace mywishlist\vue;
 
+/**
+ * Class VueParticipant
+ * @package mywishlist\vue
+ */
 class VueParticipant
 {
 
     private $elem;
     private $path;
 
+    /**
+     * VueParticipant constructor.
+     * @param $tab
+     * @param $path
+     */
     function __construct($tab, $path)
     {
         $this->elem = $tab;
         $this->path = $path;
     }
 
+    /**
+     * Methode qui creee la base de la page html dont le contenu est
+     * cree par des fonctions privees
+     * @param int $index numero de la methode à utiliser
+     * @return string contenu html
+     */
     public function render(int $index) : string {
         switch ($index){
             case 1 :
@@ -65,7 +80,9 @@ END;
         return $html;
     }
 
-
+    /**
+     * @return string la reponse html
+     */
     private function afficherParticipation() {
         $titre = $this->elem['liste']->titre;
         $token = $this->elem['liste']->token_participation;
@@ -81,10 +98,12 @@ END;
         return $html;
     }
 
+    /**
+     * @return string la reponse html
+     */
     private function afficherParticipationItem() {
         $nom = $this->elem->nom ;
         $descr = $this->elem->descr;
-        $id = $this->elem->id;
         $img = 'Pas d\'image pour l\'instant';
         $html = <<<END
 <div class="item">
@@ -99,9 +118,11 @@ END;
         return $html;
     }
 
+    /**
+     * @return string la reponse html
+     */
     private function afficherItem() : string {
         $res = '<p>'. $this->elem[0]['nom'].'</p>';
-        //$res = '<p>'. var_dump($this->elem).'</p>';
         $html = <<<END
 <div class="item"> 
     $res
@@ -110,6 +131,9 @@ END;
         return $html;
     }
 
+    /**
+     * @return string la reponse html
+     */
     private function afficherItemsListe() : string {
         $res = "<p> ";
         foreach ($this->elem as $i){
@@ -124,12 +148,15 @@ END;
         return $html;
     }
 
+    /**
+     * @return string la reponse html
+     */
     private function afficherListesSouhaits() : string {
     $res = "<p>";
     foreach ($this->elem as $liste){
         $res = $res . $liste['titre'] . '<br>';
     }
-    $res = $res /*. var_dump($this->elem)*/."</p>";
+    $res = $res . "</p>";
     $html = <<<END
 <div class="souhaits"> 
     $res
@@ -138,6 +165,9 @@ END;
 return $html;
     }
 
+    /**
+     * @return string la reponse html
+     */
     private function afficherFormulaireReservation() : string {
         if (isset($_COOKIE['pseudo'])) {
             $p=$_COOKIE['pseudo'];
