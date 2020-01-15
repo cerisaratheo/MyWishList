@@ -137,6 +137,9 @@ END;
         }
         $res = $res /*. var_dump($this->elem)*/."";
         $html = <<<END
+<div class="ajoutListe">
+    <a href="$this->path/creation/creerListe">Ajouter une liste</a>
+</div>
 <div class="souhaits"> 
     $res
 </div>
